@@ -76,7 +76,7 @@
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/07/hello-world/" class="article-date">
-  <time datetime="2015-11-07T13:46:54.880Z" itemprop="datePublished">2015-11-07</time>
+  <time datetime="2015-11-07T13:49:37.561Z" itemprop="datePublished">2015-11-07</time>
 </a>
     
   </div>
@@ -97,23 +97,22 @@
       
         <p>在折腾了两个工作日后，博主终于成功在gitHub上搭建起了个人博客，下面就将我的经验分享给大家。<br>以下的步骤参考自<a href="http://hifor.net/2015/07/01/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-hexo-github/" target="_blank" rel="external">零基础免费搭建个人博客-hexo+github</a>和<a href="http://www.freehao123.com/" target="_blank" rel="external">免费资源部落</a></p>
 <p>本文根据亲手实践进行了修改和补充。在此感谢原文作者。</p>
-<h2 id="工具选择">工具选择</h2><p>经过博主的调研发现，在gitHub上搭建博客有两种方式: 一是Jekyll, 二是hexo。Jekyll方式使用起来较为繁琐，而hexo撰写博客的常用命令只有4个，所以博主选择了hexo方式。</p>
-<h2 id="环境准备">环境准备</h2><h3 id="安装git">安装git</h3><p>保险方式是安装Git v1.9.5，其他版本可能会出现问题<br>下载地址:<a href="http://pan.baidu.com/s/1c0rroje" target="_blank" rel="external">百度云</a><br>安装只有一点要注意下，如果是windows系统，需要<br><img src="http://7xo561.com1.z0.glb.clouddn.com/git.png" alt="git install"></p>
+<h2 id="1、工具选择">1、工具选择</h2><p>经过博主的调研发现，在gitHub上搭建博客有两种方式: 一是Jekyll, 二是hexo。Jekyll方式使用起来较为繁琐，而hexo撰写博客的常用命令只有4个，所以博主选择了hexo方式。</p>
+<h2 id="2、环境准备">2、环境准备</h2><h3 id="安装git">安装git</h3><p>保险方式是安装Git v1.9.5，其他版本可能会出现问题<br>下载地址:<a href="http://pan.baidu.com/s/1c0rroje" target="_blank" rel="external">百度云</a><br>安装只有一点要注意下，如果是windows系统，需要<br><img src="http://7xo561.com1.z0.glb.clouddn.com/git.png" alt="git install"></p>
 <h3 id="安装node-js">安装node.js</h3><p>下载地址:<a href="http://pan.baidu.com/s/1o6opb9g" target="_blank" rel="external">百度云</a></p>
-<h2 id="验证软件安装正确">验证软件安装正确</h2><p>cmd<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> git --version</span><br><span class="line"><span class="number">2</span> node -v</span><br><span class="line"><span class="number">3</span> npm -v</span><br></pre></td></tr></table></figure></p>
+<h2 id="3、验证软件安装正确">3、验证软件安装正确</h2><p>cmd<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> git --version</span><br><span class="line"><span class="number">2</span> node -v</span><br><span class="line"><span class="number">3</span> npm -v</span><br></pre></td></tr></table></figure></p>
 <p>看到版本号说明安装正确</p>
-<h2 id="申请GitHub账号">申请GitHub账号</h2><p>网上很多教程有提到，步骤也比较简单。</p>
-<h2 id="安装Hexo">安装Hexo</h2><h3 id="新建一个blog文件夹。右键之，选择Git_Bash">新建一个blog文件夹。右键之，选择Git Bash</h3><h3 id="安装npm">安装npm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo</span><br></pre></td></tr></table></figure>
+<h2 id="4、申请GitHub账号">4、申请GitHub账号</h2><p>网上很多教程有提到，步骤也比较简单。</p>
+<h2 id="5、安装Hexo">5、安装Hexo</h2><h3 id="新建一个blog文件夹。右键之，选择Git_Bash">新建一个blog文件夹。右键之，选择Git Bash</h3><h3 id="安装npm">安装npm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo</span><br></pre></td></tr></table></figure>
 <p>或<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm --registry http://registry.cnpmjs.org info underscore</span><br></pre></td></tr></table></figure></p>
 <h3 id="安装hexo">安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo-cli</span><br></pre></td></tr></table></figure>
 <p>接着输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install hexo --save</span><br></pre></td></tr></table></figure></p>
 <p>验证是否安装正确<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> -v</span><br></pre></td></tr></table></figure></p>
-<h2 id="本地运行hexo">本地运行hexo</h2><h3 id="初始化">初始化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> init</span><br></pre></td></tr></table></figure>
+<h2 id="6、本地运行hexo">6、本地运行hexo</h2><h3 id="初始化">初始化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> init</span><br></pre></td></tr></table></figure>
 <h3 id="安装生成器">安装生成器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install</span><br></pre></td></tr></table></figure>
 <h3 id="本地运行博客">本地运行博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> s</span><br></pre></td></tr></table></figure>
 <p>打开浏览器，输入localhost:4000<br>停止运行<br>按Ctrl+C键</p>
-<p>##发布博客</p>
-<h3 id="打开blog/_config-yml文件，进行配置">打开blog/_config.yml文件，进行配置</h3><p><img src="http://7xo561.com1.z0.glb.clouddn.com/配置.png" alt="修改配置文件"><br><img src="http://7xo561.com1.z0.glb.clouddn.com/配置2.png" alt="修改配置文件"></p>
+<h2 id="7、发布博客">7、发布博客</h2><h3 id="打开blog/_config-yml文件，进行配置">打开blog/_config.yml文件，进行配置</h3><p><img src="http://7xo561.com1.z0.glb.clouddn.com/配置.png" alt="修改配置文件"><br><img src="http://7xo561.com1.z0.glb.clouddn.com/配置2.png" alt="修改配置文件"></p>
 <h3 id="安装hexo_git插件">安装hexo git插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 <h3 id="使用Puttygen生成密钥">使用Puttygen生成密钥</h3><p>将用Puttygen生成的密钥复制到Github空间上。<br>接着在Puttygen中导出密钥到C:\Users\dell.ssh(dell换成自己的用户名)。</p>
 <p>###注意在C:\Users\dell.ssh目录下的密钥文件要改名为默认名字<br>id_rsa， 否则ssh连接会失败。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/ssh.png" alt="修改密钥文件名"></p>
