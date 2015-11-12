@@ -73,10 +73,10 @@
     <div class="outer">
       <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-index" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/10/hello-world/" class="article-date">
-  <time datetime="2015-11-09T16:09:25.616Z" itemprop="datePublished">2015-11-10</time>
+    <a href="/2015/11/12/index/" class="article-date">
+  <time datetime="2015-11-12T02:14:38.202Z" itemprop="datePublished">2015-11-12</time>
 </a>
     
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/10/hello-world/">使用hexo+github搭建个人博客</a>
+      <a class="article-title" href="/2015/11/12/index/">使用hexo+github搭建个人博客</a>
     </h1>
   
 
@@ -122,12 +122,14 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/10/hello-world/" data-id="cigp1ekqj0000r0i47eyazrgf" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/12/index/" data-id="cigvnbusw00007oi4qolnwjcs" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
     </footer>
   </div>
   
@@ -135,9 +137,9 @@
 
 
   
-    <article id="post-new-post" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-nineGrid" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/07/new-post/" class="article-date">
+    <a href="/2015/11/07/nineGrid/" class="article-date">
   <time datetime="2015-11-07T03:39:37.000Z" itemprop="datePublished">2015-11-07</time>
 </a>
     
@@ -149,7 +151,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/07/new-post/">new post</a>
+      <a class="article-title" href="/2015/11/07/nineGrid/">用border-image制作九宫格</a>
     </h1>
   
 
@@ -157,17 +159,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><img src="http://7xo561.com1.z0.glb.clouddn.com/9.png" alt="九宫格"><br>制作如上图所示的九宫格常见的方法是使用绝对定位absolute.<br>还有一种方式是利用css3属性border-image.</p>
+<h2 id="border-image">border-image</h2><h3 id="border-image-slice">border-image-slice</h3><p>border-image-slice是border-image比较难理解的属性。<br>比如border-image-slice：100 fill;它表示距离顶部100px处<br>横切一刀，距离右侧边界100px处竖切一刀，距离底部100px处<br>横切一刀，距离左侧边界100px处竖切一刀。<br>最后形成：<br><img src="http://7xo561.com1.z0.glb.clouddn.com/fMZ3Q3.png" alt="border-image-slice"><br>在四个角的切片不会受border-image-repeat属性影响。</p>
+<h3 id="border-image-repeat">border-image-repeat</h3><p><img src="http://7xo561.com1.z0.glb.clouddn.com/border.png" alt="边框图片"><br><img src="http://7xo561.com1.z0.glb.clouddn.com/bI7naq.png" alt="border-image-repeat"><br>如上图所示，repeat不会拉伸自己，只会重复，不够一个就切一块。round会拉伸自己，刚好重复后铺满整个边框。<br>有关border-image的详细解读请参阅<a href="http://www.tuicool.com/articles/EJZnUnm" target="_blank" rel="external">css3：border-image边框图像详解</a>,感谢原文作者。</p>
+<h2 id="制作九宫格">制作九宫格</h2><h3 id="1、ps">1、ps</h3><p>用ps制作出与原图一致的图片，注意保持透明，而且切除<br>边界多余的像素。计算好边框宽度，如博主的图片是每个矩形<br>宽高100px,间距5px。</p>
+<h3 id="2、html">2、html</h3><pre><code class="bash">&lt;div id=<span class="string">"nine-grid"</span>&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="3、css">3、css</h3><pre><code class="bash"><span class="comment">#nine-grid{</span>
+    width: <span class="number">100</span>px;
+    height: <span class="number">100</span>px;
+    border-image: url(<span class="string">'9.png'</span>) <span class="number">100</span> fill     round;
+    border-width: <span class="number">100</span>px;
+    border-style: solid;
+}
+</code></pre>
+<p>当浏览器不支持border-image时，会根据border-style来显示<br>边框，所以最好定义border-style。</p>
+<p>博主发现定义了border-image-width后，仍需定义border-width，否则IE11和chrome都显示不正常，所以不如不使用border-image-width，仍使用border-width。</p>
+
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/07/new-post/" data-id="cigp1ekrb0001r0i4xj5z6dpy" class="article-share-link" data-share="baidu" data-title="new post">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cigvnbutl00037oi41y7ttfxy" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/九宫格/">九宫格</a></li></ul>
+
     </footer>
   </div>
   
@@ -183,8 +203,22 @@
     
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -202,11 +236,11 @@
       <ul>
         
           <li>
-            <a href="/2015/11/10/hello-world/">使用hexo+github搭建个人博客</a>
+            <a href="/2015/11/12/index/">使用hexo+github搭建个人博客</a>
           </li>
         
           <li>
-            <a href="/2015/11/07/new-post/">new post</a>
+            <a href="/2015/11/07/nineGrid/">用border-image制作九宫格</a>
           </li>
         
       </ul>
