@@ -4,17 +4,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>刘洋鑫的博客</title>
+  <title>Javascript模块化编程（一）：模块的写法 | 刘洋鑫的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端 css javascript">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘洋鑫的博客">
-<meta property="og:url" content="http://monovenu.com.io/index.html">
+  <meta name="description" content="博主最近在学习Javascript模块化，看到阮一峰写的博文浅显易懂，稍作修改后转载如下：现如今，前端程序越来越庞大，需要一个团队分工协作、进度管理、单元测试等等。Javascript模块化编程，已经成为一个迫切的需求。理想情况下，开发者只需要实现核心的业务逻辑，其他都可以加载别人已经写好的模块。
+1、函数写法模块就是实现特定功能的一组方法。把几个函数放在一起就是一个模块。123456functi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript模块化编程（一）：模块的写法">
+<meta property="og:url" content="http://monovenu.com.io/2015/11/13/module/index.html">
 <meta property="og:site_name" content="刘洋鑫的博客">
-<meta property="og:description" content="前端 css javascript">
+<meta property="og:description" content="博主最近在学习Javascript模块化，看到阮一峰写的博文浅显易懂，稍作修改后转载如下：现如今，前端程序越来越庞大，需要一个团队分工协作、进度管理、单元测试等等。Javascript模块化编程，已经成为一个迫切的需求。理想情况下，开发者只需要实现核心的业务逻辑，其他都可以加载别人已经写好的模块。
+1、函数写法模块就是实现特定功能的一组方法。把几个函数放在一起就是一个模块。123456functi">
+<meta property="og:updated_time" content="2015-11-13T09:23:00.036Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘洋鑫的博客">
-<meta name="twitter:description" content="前端 css javascript">
+<meta name="twitter:title" content="Javascript模块化编程（一）：模块的写法">
+<meta name="twitter:description" content="博主最近在学习Javascript模块化，看到阮一峰写的博文浅显易懂，稍作修改后转载如下：现如今，前端程序越来越庞大，需要一个团队分工协作、进度管理、单元测试等等。Javascript模块化编程，已经成为一个迫切的需求。理想情况下，开发者只需要实现核心的业务逻辑，其他都可以加载别人已经写好的模块。
+1、函数写法模块就是实现特定功能的一组方法。把几个函数放在一起就是一个模块。123456functi">
   
     <link rel="alternative" href="/atom.xml" title="刘洋鑫的博客" type="application/atom+xml">
   
@@ -71,75 +75,7 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-    <article id="post-index" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/13/index/" class="article-date">
-  <time datetime="2015-11-13T08:41:17.795Z" itemprop="datePublished">2015-11-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/13/index/">使用hexo+github搭建个人博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在折腾了两个工作日后，博主终于成功在gitHub上搭建起了个人博客，下面就将我的经验分享给大家。<br>以下的步骤参考自<a href="http://hifor.net/2015/07/01/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-hexo-github/" target="_blank" rel="external">零基础免费搭建个人博客-hexo+github</a>和<a href="http://www.freehao123.com/" target="_blank" rel="external">免费资源部落</a></p>
-<p>本文根据亲手实践进行了修改和补充。在此感谢原文作者。</p>
-<h2 id="1、工具选择">1、工具选择</h2><p>经过博主的调研发现，在gitHub上搭建博客有两种方式: 一是Jekyll, 二是hexo。Jekyll方式使用起来较为繁琐，而hexo撰写博客的常用命令只有4个，所以博主选择了hexo方式。</p>
-<h2 id="2、环境准备">2、环境准备</h2><h3 id="安装git">安装git</h3><p>保险方式是安装Git v1.9.5，其他版本可能会出现问题<br>下载地址:<a href="http://pan.baidu.com/s/1c0rroje" target="_blank" rel="external">百度云</a><br>安装只有一点要注意下，如果是windows系统，需要<br><img src="http://7xo561.com1.z0.glb.clouddn.com/git.png" alt="git install"></p>
-<h3 id="安装node-js">安装node.js</h3><p>下载地址:<a href="http://pan.baidu.com/s/1o6opb9g" target="_blank" rel="external">百度云</a></p>
-<h2 id="3、验证软件安装正确">3、验证软件安装正确</h2><p>cmd<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> git --version</span><br><span class="line"><span class="number">2</span> node -v</span><br><span class="line"><span class="number">3</span> npm -v</span><br></pre></td></tr></table></figure></p>
-<p>看到版本号说明安装正确</p>
-<h2 id="4、申请GitHub账号">4、申请GitHub账号</h2><p>网上很多教程有提到，步骤也比较简单。</p>
-<h2 id="5、安装Hexo">5、安装Hexo</h2><h3 id="新建一个blog文件夹。右键之，选择Git_Bash">新建一个blog文件夹。右键之，选择Git Bash</h3><h3 id="安装npm">安装npm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo</span><br></pre></td></tr></table></figure>
-<p>或<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm --registry http://registry.cnpmjs.org info underscore</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装hexo">安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>接着输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install hexo --save</span><br></pre></td></tr></table></figure></p>
-<p>验证是否安装正确<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> -v</span><br></pre></td></tr></table></figure></p>
-<h2 id="6、本地运行hexo">6、本地运行hexo</h2><h3 id="初始化">初始化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> init</span><br></pre></td></tr></table></figure>
-<h3 id="安装生成器">安装生成器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install</span><br></pre></td></tr></table></figure>
-<h3 id="本地运行博客">本地运行博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> s</span><br></pre></td></tr></table></figure>
-<p>打开浏览器，输入localhost:4000<br>停止运行<br>按Ctrl+C键</p>
-<h2 id="7、发布博客">7、发布博客</h2><h3 id="打开blog/_config-yml文件，进行配置">打开blog/_config.yml文件，进行配置</h3><p><img src="http://7xo561.com1.z0.glb.clouddn.com/配置.png" alt="修改配置文件"><br><img src="http://7xo561.com1.z0.glb.clouddn.com/配置2.png" alt="修改配置文件"></p>
-<h3 id="安装hexo_git插件">安装hexo git插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<h3 id="使用Puttygen生成密钥">使用Puttygen生成密钥</h3><p>将用Puttygen生成的密钥复制到Github空间上。<br>接着在Puttygen中导出密钥到C:\Users\dell.ssh(dell换成自己的用户名)。</p>
-<h3 id="注意">注意</h3><p>在C:\Users\dell.ssh目录下的密钥文件要改名为默认名字<br>id_rsa， 否则ssh连接会失败。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/ssh.png" alt="修改密钥文件名"></p>
-<h3 id="发布更新博客">发布更新博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> d -g</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://monovenu.com.io/2015/11/13/index/" data-id="cigxgfau300067gi46vkh9oly" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
-      
-
-      
-        <a href="http://monovenu.com.io/2015/11/13/index/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-  
-    <article id="post-module" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-module" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/13/module/" class="article-date">
   <time datetime="2015-11-13T08:41:05.000Z" itemprop="datePublished">2015-11-13</time>
@@ -152,8 +88,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/13/module/">Javascript模块化编程（一）：模块的写法</a>
+    <h1 class="article-title" itemprop="name">
+      Javascript模块化编程（一）：模块的写法
     </h1>
   
 
@@ -192,72 +128,30 @@
     </footer>
   </div>
   
-</article>
-
+    
+<nav id="article-nav">
   
-  
-    <article id="post-nineGrid" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/07/nineGrid/" class="article-date">
-  <time datetime="2015-11-07T03:39:37.000Z" itemprop="datePublished">2015-11-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2015/11/13/index/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
         
+          使用hexo+github搭建个人博客
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/07/nineGrid/">用border-image制作九宫格</a>
-    </h1>
   
+    <a href="/2015/11/07/nineGrid/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">用border-image制作九宫格</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://7xo561.com1.z0.glb.clouddn.com/9.png" alt="九宫格"><br>制作如上图所示的九宫格常见的方法是使用绝对定位absolute.<br>还有一种方式是利用css3属性border-image.</p>
-<h2 id="border-image">border-image</h2><h3 id="border-image-slice">border-image-slice</h3><p>border-image-slice是border-image比较难理解的属性。<br>比如border-image-slice：100 fill;它表示距离顶部100px处<br>横切一刀，距离右侧边界100px处竖切一刀，距离底部100px处<br>横切一刀，距离左侧边界100px处竖切一刀。<br>最后形成：<br><img src="http://7xo561.com1.z0.glb.clouddn.com/fMZ3Q3.png" alt="border-image-slice"><br>在四个角的切片不会受border-image-repeat属性影响。</p>
-<h3 id="border-image-repeat">border-image-repeat</h3><p><img src="http://7xo561.com1.z0.glb.clouddn.com/border.png" alt="边框图片"><br><img src="http://7xo561.com1.z0.glb.clouddn.com/bI7naq.png" alt="border-image-repeat"><br>如上图所示，repeat不会拉伸自己，只会重复，不够一个就切一块。round会拉伸自己，刚好重复后铺满整个边框。<br>有关border-image的详细解读请参阅<a href="http://www.tuicool.com/articles/EJZnUnm" target="_blank" rel="external">css3：border-image边框图像详解</a>,感谢原文作者。</p>
-<h2 id="制作九宫格">制作九宫格</h2><h3 id="1、ps">1、ps</h3><p>用ps制作出与原图一致的图片，注意保持透明，而且切除<br>边界多余的像素。计算好边框宽度，如博主的图片是每个矩形<br>宽高100px,间距5px。</p>
-<h3 id="2、html">2、html</h3><pre><code class="bash">&lt;div id=<span class="string">"nine-grid"</span>&gt;&lt;/div&gt;
-</code></pre>
-<h3 id="3、css">3、css</h3><pre><code class="bash"><span class="comment">#nine-grid{</span>
-    width: <span class="number">100</span>px;
-    height: <span class="number">100</span>px;
-    border-image: url(<span class="string">'9.png'</span>) <span class="number">100</span> fill     round;
-    border-width: <span class="number">100</span>px;
-    border-style: solid;
-}
-</code></pre>
-<p>当浏览器不支持border-image时，会根据border-style来显示<br>边框，所以最好定义border-style。</p>
-<p>博主发现定义了border-image-width后，仍需定义border-width，否则IE11和chrome都显示不正常，所以不如不使用border-image-width，仍使用border-width。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cigxgfati00007gi4d9y5218l" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
-      
-
-      
-        <a href="http://monovenu.com.io/2015/11/07/nineGrid/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/九宫格/">九宫格</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-  
-  
-  
-</section>
+  </section>
       
       <aside id="sidebar">
   
