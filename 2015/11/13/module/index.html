@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="刘洋鑫的博客">
 <meta property="og:description" content="博主最近在学习Javascript模块化，看到阮一峰写的博文浅显易懂，稍作修改后转载如下：现如今，前端程序越来越庞大，需要一个团队分工协作、进度管理、单元测试等等。Javascript模块化编程，已经成为一个迫切的需求。理想情况下，开发者只需要实现核心的业务逻辑，其他都可以加载别人已经写好的模块。
 1、函数写法模块就是实现特定功能的一组方法。把几个函数放在一起就是一个模块。123456functi">
-<meta property="og:updated_time" content="2015-11-13T09:23:00.036Z">
+<meta property="og:updated_time" content="2015-11-13T09:26:05.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript模块化编程（一）：模块的写法">
 <meta name="twitter:description" content="博主最近在学习Javascript模块化，看到阮一峰写的博文浅显易懂，稍作修改后转载如下：现如今，前端程序越来越庞大，需要一个团队分工协作、进度管理、单元测试等等。Javascript模块化编程，已经成为一个迫切的需求。理想情况下，开发者只需要实现核心的业务逻辑，其他都可以加载别人已经写好的模块。
@@ -109,7 +109,8 @@
 <p>上面的代码为module1模块添加了一个新方法m3()，然后返回新的module1模块。</p>
 <h2 id="5、宽放大模式">5、宽放大模式</h2><p>在浏览器环境中，模块的各个部分通常都是从网上获取的，有时无法知道哪个部分会先加载。<br>如果采用上一节的写法，第一个执行的部分有可能加载一个不存在空对象，这时就要采用”宽放大模式”。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">　　var module1 = ( <span class="keyword">function</span> (mod)&#123;</span><br><span class="line">　　　　//...</span><br><span class="line">&#125;</span><br><span class="line">　　　　<span class="built_in">return</span> mod;</span><br><span class="line">　　&#125;)(window.module1 || &#123;&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>与”放大模式”相比，＂宽放大模式＂就是在模块不存在时，<br>向”立即执行匿名函数”的参数传入空对象。</p>
-<h2 id="6、输入全局变量">6、输入全局变量</h2><p>独立性是模块的重要特点，模块内部最好不与程序的其他部分直接交互。<br>为了在模块内部调用全局变量，必须显式地将其他变量输入模块。<br>　　var module1 = (function ($, YAHOO) {<br>　　　　//…<br>　　})(jQuery, YAHOO);<br>上面的module1模块需要使用jQuery库和YUI库，就把这两个库（其实是两个模块）当作参数输入module1。这样做除了保证模块的独立性，还使得模块之间的依赖关系变得明显。</p>
+<h2 id="6、输入全局变量">6、输入全局变量</h2><p>独立性是模块的重要特点，模块内部最好不与程序的其他部分直接交互。<br>为了在模块内部调用全局变量，必须显式地将其他变量输入模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　var module1 = (<span class="keyword">function</span> ($, YAHOO) &#123;</span><br><span class="line">　　　　//...</span><br><span class="line">　　&#125;)(jQuery, YAHOO);</span><br></pre></td></tr></table></figure></p>
+<p>上面的module1模块需要使用jQuery库和YUI库，就把这两个库（其实是两个模块）当作参数输入module1。这样做除了保证模块的独立性，还使得模块之间的依赖关系变得明显。</p>
 
       
     </div>
