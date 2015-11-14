@@ -4,17 +4,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | 刘洋鑫的博客</title>
+  <title>CommonJS规范 | 刘洋鑫的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端 css javascript">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘洋鑫的博客">
-<meta property="og:url" content="http://monovenu.com.io/archives/2015/index.html">
+  <meta name="description" content="博主最近在学习模块化，看完阮一峰写的博文和Samaritans写的前端模块化后获益匪浅，现整理后转载如下：
+模块化的最大好处就是代码重用。我们可以使用别人的代码，想要什么功能，就加载什么模块。但是，这样做的前提是大家以同样的方式编写模块。否则你有你的写法，我有我的写法，岂不是乱了套！考虑到Javascript模块现在还没有官方规范，这一点就更重要了。
+1、node.js2009年，美国程序员Rya">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CommonJS规范">
+<meta property="og:url" content="http://monovenu.com.io/2015/11/14/commonJs/index.html">
 <meta property="og:site_name" content="刘洋鑫的博客">
-<meta property="og:description" content="前端 css javascript">
+<meta property="og:description" content="博主最近在学习模块化，看完阮一峰写的博文和Samaritans写的前端模块化后获益匪浅，现整理后转载如下：
+模块化的最大好处就是代码重用。我们可以使用别人的代码，想要什么功能，就加载什么模块。但是，这样做的前提是大家以同样的方式编写模块。否则你有你的写法，我有我的写法，岂不是乱了套！考虑到Javascript模块现在还没有官方规范，这一点就更重要了。
+1、node.js2009年，美国程序员Rya">
+<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/bg2012103002.jpg">
+<meta property="og:updated_time" content="2015-11-14T02:06:25.026Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘洋鑫的博客">
-<meta name="twitter:description" content="前端 css javascript">
+<meta name="twitter:title" content="CommonJS规范">
+<meta name="twitter:description" content="博主最近在学习模块化，看完阮一峰写的博文和Samaritans写的前端模块化后获益匪浅，现整理后转载如下：
+模块化的最大好处就是代码重用。我们可以使用别人的代码，想要什么功能，就加载什么模块。但是，这样做的前提是大家以同样的方式编写模块。否则你有你的写法，我有我的写法，岂不是乱了套！考虑到Javascript模块现在还没有官方规范，这一点就更重要了。
+1、node.js2009年，美国程序员Rya">
   
     <link rel="alternative" href="/atom.xml" title="刘洋鑫的博客" type="application/atom+xml">
   
@@ -71,116 +79,94 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/14/amd/" class="archive-article-date">
-  <time datetime="2015-11-14T02:07:50.000Z" itemprop="datePublished">11月 14</time>
+      <section id="main"><article id="post-commonJs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/14/commonJs/" class="article-date">
+  <time datetime="2015-11-14T01:22:01.000Z" itemprop="datePublished">2015-11-14</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/14/amd/">AMD规范与require.js</a>
+    <h1 class="article-title" itemprop="name">
+      CommonJS规范
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/14/commonJs/" class="archive-article-date">
-  <time datetime="2015-11-14T01:22:01.000Z" itemprop="datePublished">11月 14</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/14/commonJs/">CommonJS规范</a>
-    </h1>
-  
+        <p>博主最近在学习模块化，看完<a href="http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html" target="_blank" rel="external">阮一峰写的博文</a>和Samaritans写的<a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="external">前端模块化</a>后获益匪浅，<br>现整理后转载如下：</p>
+<p>模块化的最大好处就是代码重用。我们可以使用别人的代码，<br>想要什么功能，就加载什么模块。<br>但是，这样做的前提是大家以同样的方式编写模块。<br>否则你有你的写法，我有我的写法，岂不是乱了套！<br>考虑到Javascript模块现在还没有官方规范，这一点就更重要了。</p>
+<h2 id="1、node-js">1、node.js</h2><p>2009年，美国程序员Ryan Dahl创造了<br>node.js项目，将javascript用于服务器端编程。<br>这标志”Javascript模块化编程”正式诞生。<br>因为老实说，在浏览器环境下，没有模块也不是特别大的问题，毕竟网页程序的复杂性有限；<br>但是在服务器端，一定要有模块，与操作系统和其他应用程序互动，否则根本没法编程。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/bg2012103002.jpg" alt="node.js"><br>node.js的模块化，遵从CommonJS规范。</p>
+<h2 id="2、CommonJS">2、CommonJS</h2><h3 id="定义模块">定义模块</h3><p>根据CommonJS规范，一个文件就是一个模块。每个模块都是一个单独的作用域，也就是说在该模块内部定义的变量，无法被其他模块读取，除非定义为全局对象的属性。</p>
+<h3 id="模块输出">模块输出</h3><p>模块只有一个出口，module.exports对象。</p>
+<h3 id="加载模块">加载模块</h3><p>使用require方法读取文件并执行，返回module.exports对象。<br>实例如下：</p>
+<pre><code class="bash">//定义模块 myModel.js
+var name=<span class="string">"lyx"</span>;
+<span class="keyword">function</span> <span class="function"><span class="title">printName</span></span>(){
+    console.log(name);
+}
+module.exports={
+    <span class="built_in">print</span>Name: <span class="built_in">print</span>Name
+}
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/12/module/" class="archive-article-date">
-  <time datetime="2015-11-12T08:41:05.000Z" itemprop="datePublished">11月 12</time>
-</a>
+//加载模块
+var nameModule=require(<span class="string">'myModule.js'</span>);
+nameModule.printName();
+</code></pre>
+<h2 id="3、浏览器环境">3、浏览器环境</h2><p>有了服务器端模块后，大家自然想要客户端模块。<br>如果两者能够兼容，一个模块不用修改就可以在服务器和浏览器上运行。<br>然而，看下面的代码。</p>
+<pre><code class="bash">var nameModule=require(<span class="string">'myModule.js'</span>);
+nameModule.printName();
+</code></pre>
+<p>执行nameModule.printName();必须要等myModule模块加载完成。<br>如果加载时间很长，整个程序就会等待。这对服务器端不是问题，<br>因为所以模块存放在本地硬盘，可以同步加载，等待时间就是磁盘读取时间。<br>但是，对于浏览器，这却是一个大问题，因为模块都放在服务器端，<br>等待时间取决于网速的快慢，可能要等很长时间，浏览器处于”假死”状态。<br>因此，浏览器端的模块，不能采用”同步加载”（synchronous），<br>只能采用”异步加载”（asynchronous）。这样AMD规范就因运而生了。<br>下篇博文，介绍AMD规范。</p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/12/module/">Javascript模块化编程：模块的写法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/07/nineGrid/" class="archive-article-date">
-  <time datetime="2015-11-07T03:39:37.000Z" itemprop="datePublished">11月 7</time>
-</a>
+    </div>
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/07/nineGrid/">用border-image制作九宫格</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/01/index/" class="archive-article-date">
-  <time datetime="2015-11-01T08:41:05.000Z" itemprop="datePublished">11月 1</time>
-</a>
+        <a data-url="http://monovenu.com.io/2015/11/14/commonJs/" data-id="cigyic6lt000cp8i4sh3pfcwf" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/01/index/">使用hexo+github搭建个人博客</a>
-    </h1>
-  
 
-    </header>
+      
+        <a href="http://monovenu.com.io/2015/11/14/commonJs/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CommonJS-模块化/">CommonJS 模块化</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/14/amd/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          AMD规范与require.js
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/12/module/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">Javascript模块化编程：模块的写法</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
-</section>
+
+  </section>
       
       <aside id="sidebar">
   
