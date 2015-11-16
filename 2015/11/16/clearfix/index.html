@@ -4,25 +4,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CommonJS规范 | 刘洋鑫的博客</title>
+  <title>清除浮动造成的影响 | 刘洋鑫的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="博主最近在学习模块化，看完阮一峰写的博文和Samaritans写的前端模块化后获益匪浅，现整理后转载如下：
-模块化的最大好处就是代码重用。我们可以使用别人的代码，想要什么功能，就加载什么模块。但是，这样做的前提是大家以同样的方式编写模块。否则你有你的写法，我有我的写法，岂不是乱了套！考虑到Javascript模块现在还没有官方规范，这一点就更重要了。
-1、node.js2009年，美国程序员Rya">
+  <meta name="description" content="本文参考了知乎问题以及对overflow与zoom”清除浮动”的一些认识。
+当在一个div中浮动了一个子元素时，该div会塌陷，不会扩充到浮动子元素的高度。解决这个问题主要有4种方式。
+1、clear方式添加空标签，给空标签设置clear属性。1234&amp;lt;div class=&apos;wrap&apos;&amp;gt;	&amp;lt;div id=&quot;in&quot;&amp;gt;&amp;lt;/div&amp;gt;	&amp;lt;div class=&quot;cl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CommonJS规范">
-<meta property="og:url" content="http://monovenu.com.io/2015/11/14/commonJs/index.html">
+<meta property="og:title" content="清除浮动造成的影响">
+<meta property="og:url" content="http://monovenu.com.io/2015/11/16/clearfix/index.html">
 <meta property="og:site_name" content="刘洋鑫的博客">
-<meta property="og:description" content="博主最近在学习模块化，看完阮一峰写的博文和Samaritans写的前端模块化后获益匪浅，现整理后转载如下：
-模块化的最大好处就是代码重用。我们可以使用别人的代码，想要什么功能，就加载什么模块。但是，这样做的前提是大家以同样的方式编写模块。否则你有你的写法，我有我的写法，岂不是乱了套！考虑到Javascript模块现在还没有官方规范，这一点就更重要了。
-1、node.js2009年，美国程序员Rya">
-<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/bg2012103002.jpg">
-<meta property="og:updated_time" content="2015-11-14T02:06:25.026Z">
+<meta property="og:description" content="本文参考了知乎问题以及对overflow与zoom”清除浮动”的一些认识。
+当在一个div中浮动了一个子元素时，该div会塌陷，不会扩充到浮动子元素的高度。解决这个问题主要有4种方式。
+1、clear方式添加空标签，给空标签设置clear属性。1234&amp;lt;div class=&apos;wrap&apos;&amp;gt;	&amp;lt;div id=&quot;in&quot;&amp;gt;&amp;lt;/div&amp;gt;	&amp;lt;div class=&quot;cl">
+<meta property="og:updated_time" content="2015-11-16T07:36:42.029Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CommonJS规范">
-<meta name="twitter:description" content="博主最近在学习模块化，看完阮一峰写的博文和Samaritans写的前端模块化后获益匪浅，现整理后转载如下：
-模块化的最大好处就是代码重用。我们可以使用别人的代码，想要什么功能，就加载什么模块。但是，这样做的前提是大家以同样的方式编写模块。否则你有你的写法，我有我的写法，岂不是乱了套！考虑到Javascript模块现在还没有官方规范，这一点就更重要了。
-1、node.js2009年，美国程序员Rya">
+<meta name="twitter:title" content="清除浮动造成的影响">
+<meta name="twitter:description" content="本文参考了知乎问题以及对overflow与zoom”清除浮动”的一些认识。
+当在一个div中浮动了一个子元素时，该div会塌陷，不会扩充到浮动子元素的高度。解决这个问题主要有4种方式。
+1、clear方式添加空标签，给空标签设置clear属性。1234&amp;lt;div class=&apos;wrap&apos;&amp;gt;	&amp;lt;div id=&quot;in&quot;&amp;gt;&amp;lt;/div&amp;gt;	&amp;lt;div class=&quot;cl">
   
     <link rel="alternative" href="/atom.xml" title="刘洋鑫的博客" type="application/atom+xml">
   
@@ -79,10 +78,10 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-commonJs" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-clearfix" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/14/commonJs/" class="article-date">
-  <time datetime="2015-11-14T01:22:01.000Z" itemprop="datePublished">2015-11-14</time>
+    <a href="/2015/11/16/clearfix/" class="article-date">
+  <time datetime="2015-11-16T06:18:10.000Z" itemprop="datePublished">2015-11-16</time>
 </a>
     
   </div>
@@ -93,7 +92,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      CommonJS规范
+      清除浮动造成的影响
     </h1>
   
 
@@ -101,44 +100,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>博主最近在学习模块化，看完<a href="http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html" target="_blank" rel="external">阮一峰写的博文</a>和Samaritans写的<a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="external">前端模块化</a>后获益匪浅，<br>现整理后转载如下：</p>
-<p>模块化的最大好处就是代码重用。我们可以使用别人的代码，<br>想要什么功能，就加载什么模块。<br>但是，这样做的前提是大家以同样的方式编写模块。<br>否则你有你的写法，我有我的写法，岂不是乱了套！<br>考虑到Javascript模块现在还没有官方规范，这一点就更重要了。</p>
-<h2 id="1、node-js">1、node.js</h2><p>2009年，美国程序员Ryan Dahl创造了<br>node.js项目，将javascript用于服务器端编程。<br>这标志”Javascript模块化编程”正式诞生。<br>因为老实说，在浏览器环境下，没有模块也不是特别大的问题，毕竟网页程序的复杂性有限；<br>但是在服务器端，一定要有模块，与操作系统和其他应用程序互动，否则根本没法编程。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/bg2012103002.jpg" alt="node.js"><br>node.js的模块化，遵从CommonJS规范。</p>
-<h2 id="2、CommonJS">2、CommonJS</h2><h3 id="定义模块">定义模块</h3><p>根据CommonJS规范，一个文件就是一个模块。每个模块都是一个单独的作用域，也就是说在该模块内部定义的变量，无法被其他模块读取，除非定义为全局对象的属性。</p>
-<h3 id="模块输出">模块输出</h3><p>模块只有一个出口，module.exports对象。</p>
-<h3 id="加载模块">加载模块</h3><p>使用require方法读取文件并执行，返回module.exports对象。<br>实例如下：</p>
-<pre><code class="bash">//定义模块 myModel.js
-var name=<span class="string">"lyx"</span>;
-<span class="keyword">function</span> <span class="function"><span class="title">printName</span></span>(){
-    console.log(name);
-}
-module.exports={
-    <span class="built_in">print</span>Name: <span class="built_in">print</span>Name
-}
-
-//加载模块
-var nameModule=require(<span class="string">'myModule.js'</span>);
-nameModule.printName();
-</code></pre>
-<h2 id="3、浏览器环境">3、浏览器环境</h2><p>有了服务器端模块后，大家自然想要客户端模块。<br>如果两者能够兼容，一个模块不用修改就可以在服务器和浏览器上运行。<br>然而，看下面的代码。</p>
-<pre><code class="bash">var nameModule=require(<span class="string">'myModule.js'</span>);
-nameModule.printName();
-</code></pre>
-<p>执行nameModule.printName();必须要等myModule模块加载完成。<br>如果加载时间很长，整个程序就会等待。这对服务器端不是问题，<br>因为所以模块存放在本地硬盘，可以同步加载，等待时间就是磁盘读取时间。<br>但是，对于浏览器，这却是一个大问题，因为模块都放在服务器端，<br>等待时间取决于网速的快慢，可能要等很长时间，浏览器处于”假死”状态。<br>因此，浏览器端的模块，不能采用”同步加载”（synchronous），<br>只能采用”异步加载”（asynchronous）。这样AMD规范就因运而生了。<br>下篇博文，介绍AMD规范。</p>
+        <p>本文参考了<a href="http://www.zhihu.com/question/30938856" target="_blank" rel="external">知乎问题</a>以及<a href="http://www.zhangxinxu.com/wordpress/2010/01/%E5%AF%B9overflow%E4%B8%8Ezoom%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%A4%E8%AF%86/" target="_blank" rel="external">对overflow与zoom”清除浮动”的一些认识</a>。</p>
+<p>当在一个div中浮动了一个子元素时，该div会塌陷，<br>不会扩充到浮动子元素的高度。解决这个问题主要有4种方式。</p>
+<h2 id="1、clear方式">1、clear方式</h2><p>添加空标签，给空标签设置clear属性。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">'wrap'</span>&gt;</span><br><span class="line">	&lt;div id=<span class="string">"in"</span>&gt;&lt;/div&gt;</span><br><span class="line">	&lt;div class=<span class="string">"clearfix"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.clearfix&#123;</span><br><span class="line">	clear:both;</span><br><span class="line">&#125;</span><br><span class="line">.in&#123;</span><br><span class="line">	<span class="built_in">float</span>:left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点是简单易行。缺点是增加了无意义的空标签，不利于语义化。</p>
+<h2 id="2、给父级添加overflow">2、给父级添加overflow</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap&#123;</span><br><span class="line">	background: blue;</span><br><span class="line">	overflow: hidden;/*不为默认的visible*/		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点是不存在结构和语义上的问题，缺点是内容增多时候容易造成不会自动换行导致内容被隐藏掉。</p>
+<h3 id="BFC">BFC</h3><p>为什么给父级添加overflow会起作用呢。要解释这个问题先要了解BFC.BFC的全称是块级排版上下文。也可以称之为块布局上下文。<br>每个视口会默认建立一个块布局上下文。假设一个文档所有的块盒overflow属性都是”visible”，那么它们必定属于一个块布局上下文，也就是视口所产生的块布局上下文。但是一旦有一个块盒设置了”visible”以外的值，新的块布局上下文就产生了。它就像为它的内容开辟了新的摆放空间，这个摆放空间是相对独立的。<br>这个独立的块布局上下文会产生一种“包裹”效果，父元素会刚好包裹住子元素，所以overflow: hidden的父元素不会塌陷。<br>会产生独立的块布局上下文的情况还包括：浮动元素、绝对定位元素、除块盒(block)以外的块容器(如table-cells)。</p>
+<h2 id="3、父级float">3、父级float</h2><p>原理同overflow, 会形成独立的块布局上下文。<br>优点是不存在结构和语义上的问题，缺点是与父元素相邻的元素的布局会受到影响。</p>
+<h2 id="4、::after伪元素">4、::after伪元素</h2><p>给父类添加伪元素。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"clearfix"</span>&gt;</span><br><span class="line">	&lt;div id=<span class="string">"in"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.clearfix::after&#123;</span><br><span class="line">	content:<span class="string">''</span> ;</span><br><span class="line">	clear: both;</span><br><span class="line">	display: block;</span><br><span class="line">	visibility: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方式与clear方式原理一致，但是不会添加空标签。<br>::after会在元素的内容后面附加内容，将添加的内容设置为块级显示并clear就可以清除浮动造成的影响。<br>:: 表示伪元素，: 表示伪类。为兼容老版IE,也用:after。</p>
+<h2 id="总结">总结</h2><p>实际上，以上的方式可以归类为2种。一种是清除浮动方式：clear.另一种是形成独立的块布局上下文，让父元素包裹子元素。<br>衡量利弊后，博主认为第四种方式适用性更好。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/14/commonJs/" data-id="cih1mxl47000cdoi4n34jnlt6" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/16/clearfix/" data-id="cih1mxl49000fdoi417l04db9" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
       
 
       
-        <a href="http://monovenu.com.io/2015/11/14/commonJs/#ds-thread" class="article-comment-link">评论</a>
+        <a href="http://monovenu.com.io/2015/11/16/clearfix/#ds-thread" class="article-comment-link">评论</a>
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CommonJS-模块化/">CommonJS 模块化</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/清除浮动-after伪元素/">清除浮动 after伪元素</a></li></ul>
 
     </footer>
   </div>
@@ -146,19 +134,10 @@ nameModule.printName();
     
 <nav id="article-nav">
   
-    <a href="/2015/11/14/amd/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          AMD规范与require.js
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/11/12/module/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/11/14/amd/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">Javascript模块化编程：模块的写法</div>
+      <div class="article-nav-title">AMD规范与require.js</div>
     </a>
   
 </nav>
