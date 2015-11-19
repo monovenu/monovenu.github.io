@@ -188,63 +188,6 @@
 
   
   
-    <article id="post-clearfix" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/16/clearfix/" class="article-date">
-  <time datetime="2015-11-16T06:18:10.000Z" itemprop="datePublished">2015-11-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/clearfix/">清除浮动造成的影响</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文参考了<a href="http://www.zhihu.com/question/30938856" target="_blank" rel="external">知乎问题</a>以及<a href="http://www.zhangxinxu.com/wordpress/2010/01/%E5%AF%B9overflow%E4%B8%8Ezoom%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%A4%E8%AF%86/" target="_blank" rel="external">对overflow与zoom”清除浮动”的一些认识</a>。</p>
-<p>当在一个div中浮动了一个子元素时，该div会塌陷，<br>不会扩充到浮动子元素的高度。解决这个问题主要有4种方式。</p>
-<h2 id="1、clear方式">1、clear方式</h2><p>添加空标签，给空标签设置clear属性。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">'wrap'</span>&gt;</span><br><span class="line">	&lt;div id=<span class="string">"in"</span>&gt;&lt;/div&gt;</span><br><span class="line">	&lt;div class=<span class="string">"clearfix"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.clearfix&#123;</span><br><span class="line">	clear:both;</span><br><span class="line">&#125;</span><br><span class="line">.in&#123;</span><br><span class="line">	<span class="built_in">float</span>:left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>优点是简单易行。缺点是增加了无意义的空标签，不利于语义化。</p>
-<h2 id="2、给父级添加overflow">2、给父级添加overflow</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap&#123;</span><br><span class="line">	background: blue;</span><br><span class="line">	overflow: hidden;/*不为默认的visible*/		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>优点是不存在结构和语义上的问题，缺点是内容增多时候容易造成不会自动换行导致内容被隐藏掉。</p>
-<h3 id="BFC">BFC</h3><p>为什么给父级添加overflow会起作用呢。要解释这个问题先要了解BFC.BFC的全称是块级排版上下文。也可以称之为块布局上下文。<br>每个视口会默认建立一个块布局上下文。假设一个文档所有的块盒overflow属性都是”visible”，那么它们必定属于一个块布局上下文，也就是视口所产生的块布局上下文。但是一旦有一个块盒设置了”visible”以外的值，新的块布局上下文就产生了。它就像为它的内容开辟了新的摆放空间，这个摆放空间是相对独立的。<br>这个独立的块布局上下文会产生一种“包裹”效果，父元素会刚好包裹住子元素，所以overflow: hidden的父元素不会塌陷。<br>会产生独立的块布局上下文的情况还包括：浮动元素、绝对定位元素、除块盒(block)以外的块容器(如table-cells)。</p>
-<h2 id="3、父级float">3、父级float</h2><p>原理同overflow, 会形成独立的块布局上下文。<br>优点是不存在结构和语义上的问题，缺点是与父元素相邻的元素的布局会受到影响。</p>
-<h2 id="4、::after伪元素">4、::after伪元素</h2><p>给父类添加伪元素。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"clearfix"</span>&gt;</span><br><span class="line">	&lt;div id=<span class="string">"in"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.clearfix::after&#123;</span><br><span class="line">	content:<span class="string">''</span> ;</span><br><span class="line">	clear: both;</span><br><span class="line">	display: block;</span><br><span class="line">	visibility: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该方式与clear方式原理一致，但是不会添加空标签。<br>::after会在元素的内容后面附加内容，将添加的内容设置为块级显示并clear就可以清除浮动造成的影响。<br>:: 表示伪元素，: 表示伪类。为兼容老版IE,也用:after。</p>
-<h2 id="总结">总结</h2><p>实际上，以上的方式可以归类为2种。一种是清除浮动方式：clear.另一种是形成独立的块布局上下文，让父元素包裹子元素。<br>衡量利弊后，博主认为第四种方式适用性更好。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://monovenu.com.io/2015/11/16/clearfix/" data-id="cih60xga7000lagi4dydayut9" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
-      
-
-      
-        <a href="http://monovenu.com.io/2015/11/16/clearfix/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/清除浮动-after伪元素/">清除浮动 after伪元素</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-  
-  
     <article id="post-amd" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/14/amd/" class="article-date">
@@ -501,6 +444,63 @@ nameModule.printName();
 
   
   
+    <article id="post-clearfix" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/28/clearfix/" class="article-date">
+  <time datetime="2015-10-28T06:18:10.000Z" itemprop="datePublished">2015-10-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/28/clearfix/">清除浮动造成的影响</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文参考了<a href="http://www.zhihu.com/question/30938856" target="_blank" rel="external">知乎问题</a>以及<a href="http://www.zhangxinxu.com/wordpress/2010/01/%E5%AF%B9overflow%E4%B8%8Ezoom%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%A4%E8%AF%86/" target="_blank" rel="external">对overflow与zoom”清除浮动”的一些认识</a>。</p>
+<p>当在一个div中浮动了一个子元素时，该div会塌陷，<br>不会扩充到浮动子元素的高度。解决这个问题主要有4种方式。</p>
+<h2 id="1、clear方式">1、clear方式</h2><p>添加空标签，给空标签设置clear属性。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">'wrap'</span>&gt;</span><br><span class="line">	&lt;div id=<span class="string">"in"</span>&gt;&lt;/div&gt;</span><br><span class="line">	&lt;div class=<span class="string">"clearfix"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.clearfix&#123;</span><br><span class="line">	clear:both;</span><br><span class="line">&#125;</span><br><span class="line">.in&#123;</span><br><span class="line">	<span class="built_in">float</span>:left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点是简单易行。缺点是增加了无意义的空标签，不利于语义化。</p>
+<h2 id="2、给父级添加overflow">2、给父级添加overflow</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.wrap&#123;</span><br><span class="line">	background: blue;</span><br><span class="line">	overflow: hidden;/*不为默认的visible*/		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>优点是不存在结构和语义上的问题，缺点是内容增多时候容易造成不会自动换行导致内容被隐藏掉。</p>
+<h3 id="BFC">BFC</h3><p>为什么给父级添加overflow会起作用呢。要解释这个问题先要了解BFC.BFC的全称是块级排版上下文。也可以称之为块布局上下文。<br>每个视口会默认建立一个块布局上下文。假设一个文档所有的块盒overflow属性都是”visible”，那么它们必定属于一个块布局上下文，也就是视口所产生的块布局上下文。但是一旦有一个块盒设置了”visible”以外的值，新的块布局上下文就产生了。它就像为它的内容开辟了新的摆放空间，这个摆放空间是相对独立的。<br>这个独立的块布局上下文会产生一种“包裹”效果，父元素会刚好包裹住子元素，所以overflow: hidden的父元素不会塌陷。<br>会产生独立的块布局上下文的情况还包括：浮动元素、绝对定位元素、除块盒(block)以外的块容器(如table-cells)。</p>
+<h2 id="3、父级float">3、父级float</h2><p>原理同overflow, 会形成独立的块布局上下文。<br>优点是不存在结构和语义上的问题，缺点是与父元素相邻的元素的布局会受到影响。</p>
+<h2 id="4、::after伪元素">4、::after伪元素</h2><p>给父类添加伪元素。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"clearfix"</span>&gt;</span><br><span class="line">	&lt;div id=<span class="string">"in"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.clearfix::after&#123;</span><br><span class="line">	content:<span class="string">''</span> ;</span><br><span class="line">	clear: both;</span><br><span class="line">	display: block;</span><br><span class="line">	visibility: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该方式与clear方式原理一致，但是不会添加空标签。<br>::after会在元素的内容后面附加内容，将添加的内容设置为块级显示并clear就可以清除浮动造成的影响。<br>:: 表示伪元素，: 表示伪类。为兼容老版IE,也用:after。</p>
+<h2 id="总结">总结</h2><p>实际上，以上的方式可以归类为2种。一种是清除浮动方式：clear.另一种是形成独立的块布局上下文，让父元素包裹子元素。<br>衡量利弊后，博主认为第四种方式适用性更好。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cih60xga7000lagi4dydayut9" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
+      
+
+      
+        <a href="http://monovenu.com.io/2015/10/28/clearfix/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/清除浮动-after伪元素/">清除浮动 after伪元素</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+  
+  
     <article id="post-index" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/10/21/index/" class="article-date">
@@ -596,7 +596,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -616,15 +616,15 @@ nameModule.printName();
           </li>
         
           <li>
-            <a href="/2015/11/16/clearfix/">清除浮动造成的影响</a>
-          </li>
-        
-          <li>
             <a href="/2015/11/14/amd/">AMD规范与require.js</a>
           </li>
         
           <li>
             <a href="/2015/11/14/commonJs/">CommonJS规范</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/12/module/">Javascript模块化编程：模块的写法</a>
           </li>
         
       </ul>
