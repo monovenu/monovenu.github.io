@@ -4,25 +4,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>用border-image制作九宫格 | 刘洋鑫的博客</title>
+  <title>Tag: CommonJS | 刘洋鑫的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="制作如上图所示的九宫格常见的方法是使用绝对定位absolute.还有一种方式是利用css3属性border-image.
-border-imageborder-image-sliceborder-image-slice是border-image比较难理解的属性。比如border-image-slice：100 fill;它表示距离顶部100px处横切一刀，距离右侧边界100px处竖切一刀，距离底部">
-<meta property="og:type" content="article">
-<meta property="og:title" content="用border-image制作九宫格">
-<meta property="og:url" content="http://monovenu.com.io/2015/11/07/nineGrid/index.html">
+  <meta name="description" content="前端 css javascript">
+<meta property="og:type" content="website">
+<meta property="og:title" content="刘洋鑫的博客">
+<meta property="og:url" content="http://monovenu.com.io/tags/CommonJS/index.html">
 <meta property="og:site_name" content="刘洋鑫的博客">
-<meta property="og:description" content="制作如上图所示的九宫格常见的方法是使用绝对定位absolute.还有一种方式是利用css3属性border-image.
-border-imageborder-image-sliceborder-image-slice是border-image比较难理解的属性。比如border-image-slice：100 fill;它表示距离顶部100px处横切一刀，距离右侧边界100px处竖切一刀，距离底部">
-<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/9.png">
-<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/fMZ3Q3.png">
-<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/border.png">
-<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/bI7naq.png">
-<meta property="og:updated_time" content="2015-11-20T02:19:35.555Z">
+<meta property="og:description" content="前端 css javascript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用border-image制作九宫格">
-<meta name="twitter:description" content="制作如上图所示的九宫格常见的方法是使用绝对定位absolute.还有一种方式是利用css3属性border-image.
-border-imageborder-image-sliceborder-image-slice是border-image比较难理解的属性。比如border-image-slice：100 fill;它表示距离顶部100px处横切一刀，距离右侧边界100px处竖切一刀，距离底部">
+<meta name="twitter:title" content="刘洋鑫的博客">
+<meta name="twitter:description" content="前端 css javascript">
   
     <link rel="alternative" href="/atom.xml" title="刘洋鑫的博客" type="application/atom+xml">
   
@@ -79,86 +71,40 @@ border-imageborder-image-sliceborder-image-slice是border-image比较难理解�
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-nineGrid" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/07/nineGrid/" class="article-date">
-  <time datetime="2015-11-07T03:39:37.000Z" itemprop="datePublished">2015-11-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+      <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      用border-image制作九宫格
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2015/11/14/commonJs/" class="archive-article-date">
+  <time datetime="2015-11-14T01:22:01.000Z" itemprop="datePublished">11月 14</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/11/14/commonJs/">CommonJS规范</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://7xo561.com1.z0.glb.clouddn.com/9.png" alt="九宫格"><br>制作如上图所示的九宫格常见的方法是使用绝对定位absolute.<br>还有一种方式是利用css3属性border-image.</p>
-<h2 id="border-image">border-image</h2><h3 id="border-image-slice">border-image-slice</h3><p>border-image-slice是border-image比较难理解的属性。<br>比如border-image-slice：100 fill;它表示距离顶部100px处<br>横切一刀，距离右侧边界100px处竖切一刀，距离底部100px处<br>横切一刀，距离左侧边界100px处竖切一刀。<br>最后形成：<br><img src="http://7xo561.com1.z0.glb.clouddn.com/fMZ3Q3.png" alt="border-image-slice"><br>在四个角的切片不会受border-image-repeat属性影响。</p>
-<h3 id="border-image-repeat">border-image-repeat</h3><p><img src="http://7xo561.com1.z0.glb.clouddn.com/border.png" alt="边框图片"><br><img src="http://7xo561.com1.z0.glb.clouddn.com/bI7naq.png" alt="border-image-repeat"><br>如上图所示，repeat不会拉伸自己，只会重复，不够一个就切一块。round会拉伸自己，刚好重复后铺满整个边框。<br>有关border-image的详细解读请参阅<a href="http://www.tuicool.com/articles/EJZnUnm" target="_blank" rel="external">css3：border-image边框图像详解</a>,感谢原文作者。</p>
-<h2 id="制作九宫格">制作九宫格</h2><h3 id="1、ps">1、ps</h3><p>用ps制作出与原图一致的图片，注意保持透明，而且切除<br>边界多余的像素。计算好边框宽度，如博主的图片是每个矩形<br>宽高100px,间距5px。</p>
-<h3 id="2、html">2、html</h3><pre><code class="bash">&lt;div id=<span class="string">"nine-grid"</span>&gt;&lt;/div&gt;
-</code></pre>
-<h3 id="3、css">3、css</h3><pre><code class="bash"><span class="comment">#nine-grid{</span>
-    width: <span class="number">100</span>px;
-    height: <span class="number">100</span>px;
-    border-image: url(<span class="string">'9.png'</span>) <span class="number">100</span> fill     round;
-    border-width: <span class="number">100</span>px;
-    border-style: solid;
-}
-</code></pre>
-<p>当浏览器不支持border-image时，会根据border-style来显示<br>边框，所以最好定义border-style。</p>
-<p>博主发现定义了border-image-width后，仍需定义border-width，否则IE11和chrome都显示不正常，所以不如不使用border-image-width，仍使用border-width。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cih70nvie00034gi41stgos1f" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
-      
-
-      
-        <a href="http://monovenu.com.io/2015/11/07/nineGrid/#ds-thread" class="article-comment-link">评论</a>
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/border-image/">border-image</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/九宫格/">九宫格</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/11/12/module/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          Javascript模块化编程：模块的写法
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/10/28/clearfix/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">清除浮动造成的影响</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
-  </section>
+  
+  
+    </div></section>
+  
+</section>
       
       <aside id="sidebar">
   

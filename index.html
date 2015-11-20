@@ -73,6 +73,61 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-jQuery-selector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/20/jQuery-selector/" class="article-date">
+  <time datetime="2015-11-20T01:55:59.000Z" itemprop="datePublished">2015-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/20/jQuery-selector/">jQuery选择器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>博主最近重温了jQuery的选择器，再次感到了它的强大。</p>
+<h2 id="1、基本选择器">1、基本选择器</h2><p>$(‘选择器’)。基本选择器通过id, class或元素名来选择。<br>多选$(‘span,#one’)</p>
+<h2 id="2、层次选择器">2、层次选择器</h2><p>通过DOM元素之间的层次关系来选择。<br>后代, $(‘div span’)<br>子元素, $(‘div&gt;span’),不包含孙子辈及以下的<br>相邻下一个兄弟, $(‘.one+div’)<br>之后所有兄弟, $(‘.one~div’)</p>
+<h2 id="3、过滤选择器">3、过滤选择器</h2><p>与css的伪类选择器语法相同，以”:”开头。</p>
+<h3 id="基本过滤选择器">基本过滤选择器</h3><p>第一个, :first, $(‘div:first’)选取所有div中的第一个<br>最后一个, :last, $(‘div:last’)<br>去除匹配的元素, :not(选择器), $(‘div:not(:first)’)选取所有div,除了第一个div.<br>注意:not()内部没有引号。<br>偶数号索引, :even $(‘input:even’), 索引从0开始<br>奇数号索引, :odd $(‘input:odd’)<br>索引等于index, :eq(index), $(‘input:eq(1)’)<br>索引大于index, :gt(index), $(‘input:gt(2)’)<br>索引小于index, :lt(index), $(‘input:lt(2)’)<br>获得焦点, :focus, $(‘focus’)</p>
+<h3 id="内容过滤选择器">内容过滤选择器</h3><p>依据子元素或文本内容进行过滤<br>选择含有文本内容的元素, :contains(‘文本’), $(“div:contains(‘我’)”) </p>
+<h3 id="可见性过滤选择器">可见性过滤选择器</h3><p>可见, :visible, $(‘:visible’)<br>不可见， :hidden</p>
+<h3 id="属性过滤选择器">属性过滤选择器</h3><p>依据css属性选择器，如$(‘[title=test]’)选取属性为test的元素</p>
+<h3 id="表单属性过滤选择器">表单属性过滤选择器</h3><p>对表单元素进行过滤。<br>可用, :enabled, $(‘input:enabled’)<br>被选中, :checked<br>被选中的选项,用于下拉列表 :selected, $(‘select option:selected’)</p>
+<h2 id="选择器实例">选择器实例</h2><p>以下是一个品牌列表的效果。默认是精简显示，点击’显示全部’后，<br>会显示全部品牌，同时将推荐的品牌高亮显示，按钮文字换成’精简显示’。<br>再次点击’精简显示’，回到默认页面。注意’其他’总算显示的。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151120110714.png" alt="品牌精简显示"><br><img src="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151120110735.png" alt="品牌全部显示"></p>
+<h3 id="html代码">html代码</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"box"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>索尼<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"number"</span>&gt;</span>(23412)<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>佳能<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"number"</span>&gt;</span>(23423)<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>三星<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"number"</span>&gt;</span>(34243)<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>明基<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"number"</span>&gt;</span>(2513)<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>理光<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"number"</span>&gt;</span>(2533)<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>富士<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"number"</span>&gt;</span>(25423)<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span>&gt;</span>其他<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"number"</span>&gt;</span>(25023)<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">ul</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"showmore"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"more.html"</span>&gt;</span><span class="tag">&lt;<span class="title">span</span>&gt;</span>显示全部<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;/<span class="title">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">div</span>&gt;</span>		</span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="javaScript代码">javaScript代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$category=$(<span class="string">"ul li:gt(2):not(':last')"</span>) <span class="comment">//获取索引值大于2的品牌，除了最后一条</span></span><br><span class="line">	$category.hide(); </span><br><span class="line">	$(<span class="string">'.showmore&gt;a'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>($category.is(<span class="string">':visible'</span>))&#123;	<span class="comment">//如果显示			</span></span><br><span class="line">			$category.hide();</span><br><span class="line">			$(<span class="keyword">this</span>).find(<span class="string">'span'</span>).text(<span class="string">"显示全部"</span>).css(<span class="string">"background"</span>,<span class="string">"#fff"</span>);</span><br><span class="line">			<span class="comment">//$()将this转换为jQuery对象</span></span><br><span class="line">			$(<span class="string">'ul li'</span>).removeClass(<span class="string">"promoted"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			$category.show();</span><br><span class="line">			$(<span class="keyword">this</span>).find(<span class="string">"span"</span>).text(<span class="string">"精简显示"</span>).css(<span class="string">"background"</span>,<span class="string">"#ad4"</span>);</span><br><span class="line">			$(<span class="string">'ul li'</span>).filter(<span class="string">":contains('佳能'),:contains('理光'),:contains('索尼')"</span>)</span><br><span class="line">			.addClass(<span class="string">"promoted"</span>);</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://monovenu.com.io/2015/11/20/jQuery-selector/" data-id="cih70nvjh000c4gi4690xnkb7" class="article-share-link" data-share="baidu" data-title="jQuery选择器">分享到</a>
+      
+
+      
+        <a href="http://monovenu.com.io/2015/11/20/jQuery-selector/#ds-thread" class="article-comment-link">评论</a>
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/选择器/">选择器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+  
+  
     <article id="post-http-code" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/19/http-code/" class="article-date">
@@ -120,7 +175,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cih60xg9z000fagi48eenc616" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cih70nvjo000g4gi4x47zfcv6" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
       
 
       
@@ -128,7 +183,7 @@
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP响应码-nginx/">HTTP响应码 nginx</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
 
     </footer>
   </div>
@@ -171,7 +226,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/16/jQuery代码风格/" data-id="cih60xg9u0009agi459kpckgo" class="article-share-link" data-share="baidu" data-title="jQuery代码风格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/16/jQuery代码风格/" data-id="cih70nvjd00094gi4tvmvdq61" class="article-share-link" data-share="baidu" data-title="jQuery代码风格">分享到</a>
       
 
       
@@ -179,7 +234,7 @@
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery-代码风格/">jQuery 代码风格</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码风格/">代码风格</a></li></ul>
 
     </footer>
   </div>
@@ -240,7 +295,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/14/amd/" data-id="cih60xg8w0000agi49icjnjde" class="article-share-link" data-share="baidu" data-title="AMD规范与require.js">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/14/amd/" data-id="cih70nvdf00004gi4lhks2wv1" class="article-share-link" data-share="baidu" data-title="AMD规范与require.js">分享到</a>
       
 
       
@@ -248,7 +303,7 @@
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/amd-模块化-require-js/">amd 模块化 require.js</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/amd/">amd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/require-js/">require.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块化/">模块化</a></li></ul>
 
     </footer>
   </div>
@@ -308,7 +363,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/14/commonJs/" data-id="cih60xga2000iagi47iceu3ni" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/14/commonJs/" data-id="cih70nvjt000j4gi4k66onuoh" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
       
 
       
@@ -316,7 +371,7 @@ nameModule.printName();
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CommonJS-模块化/">CommonJS 模块化</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CommonJS/">CommonJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块化/">模块化</a></li></ul>
 
     </footer>
   </div>
@@ -367,7 +422,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cih60xg9r0006agi47j1fmrnb" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cih70nvj800064gi4tva97xdv" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
       
 
       
@@ -375,7 +430,7 @@ nameModule.printName();
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块化-Javascript/">模块化 Javascript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块化/">模块化</a></li></ul>
 
     </footer>
   </div>
@@ -427,7 +482,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cih60xg9n0003agi4qf7cbm83" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cih70nvie00034gi41stgos1f" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
       
 
       
@@ -435,7 +490,7 @@ nameModule.printName();
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/九宫格-border-image/">九宫格 border-image</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/border-image/">border-image</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/九宫格/">九宫格</a></li></ul>
 
     </footer>
   </div>
@@ -484,7 +539,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cih60xga7000lagi4dydayut9" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cih70nvjz000m4gi4lsbbis0r" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
       
 
       
@@ -492,7 +547,7 @@ nameModule.printName();
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/清除浮动-after伪元素/">清除浮动 after伪元素</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/after伪元素/">after伪元素</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/清除浮动/">清除浮动</a></li></ul>
 
     </footer>
   </div>
@@ -550,7 +605,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/21/index/" data-id="cih60xg9w000cagi462g40pxk" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/21/index/" data-id="cih70nvjk000d4gi4p3tw2vyu" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
       
 
       
@@ -578,7 +633,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS-模块化/">CommonJS 模块化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码-nginx/">HTTP响应码 nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd-模块化-require-js/">amd 模块化 require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery-代码风格/">jQuery 代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格-border-image/">九宫格 border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化-Javascript/">模块化 Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动-after伪元素/">清除浮动 after伪元素</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -587,7 +642,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CommonJS-模块化/" style="font-size: 10px;">CommonJS 模块化</a> <a href="/tags/HTTP响应码-nginx/" style="font-size: 10px;">HTTP响应码 nginx</a> <a href="/tags/amd-模块化-require-js/" style="font-size: 10px;">amd 模块化 require.js</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery-代码风格/" style="font-size: 10px;">jQuery 代码风格</a> <a href="/tags/九宫格-border-image/" style="font-size: 10px;">九宫格 border-image</a> <a href="/tags/模块化-Javascript/" style="font-size: 10px;">模块化 Javascript</a> <a href="/tags/清除浮动-after伪元素/" style="font-size: 10px;">清除浮动 after伪元素</a>
+      <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a>
     </div>
   </div>
 
@@ -596,7 +651,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -606,6 +661,10 @@ nameModule.printName();
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/20/jQuery-selector/">jQuery选择器</a>
+          </li>
         
           <li>
             <a href="/2015/11/19/http-code/">HTTP状态响应码与nginx</a>
@@ -621,10 +680,6 @@ nameModule.printName();
         
           <li>
             <a href="/2015/11/14/commonJs/">CommonJS规范</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/12/module/">Javascript模块化编程：模块的写法</a>
           </li>
         
       </ul>
