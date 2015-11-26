@@ -73,6 +73,76 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-echarts" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/25/echarts/" class="article-date">
+  <time datetime="2015-11-25T02:46:00.000Z" itemprop="datePublished">2015-11-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/25/echarts/">echarts 图表库入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>开源的ECharts来自百度EFE数据可视化团队，可以以图表的方式将数据展现给用户。<br>引入echarts共有三种方式，模块化单文件引入是官方推荐的方式，可以实现按需加载，文件数目少，方便上线，本文只介绍这种方式，更多信息请参考<a href="http://echarts.baidu.com/index.html" target="_blank" rel="external">官方文档</a>.</p>
+<h2 id="1、下载">1、下载</h2><p>从官网下载echarts解压后的”build/dist”目录下包含：<br>echarts.js :<br>这是包含AMD加载器的echarts主文件，需要通过script最先引入<br>chart（文件夹） :<br>对应每一个图表类型独立文件，根据应用需求可实现图表类型按需加载<br>line.js : 折线图（如需折柱动态类型切换，require时还需要echarts/chart/bar）<br>bar.js : 柱形图（如需折柱动态类型切换，require时还需要echarts/chart/line）<br>scatter.js : 散点图<br>k.js : K线图<br>pie.js :<br>radar.js : 雷达图<br>map.js : 地图<br>force.js : 力导向布局图<br>chord.js : 和弦图<br>funnel.js : 漏斗图<br>gauge.js : 仪表盘<br>eventRiver.js : 事件河流图<br>treemap.js : 矩阵树图<br>venn.js : 韦恩图</p>
+<p>“build/source”目录下的文件没有经过压缩，可用于调试。</p>
+<h2 id="2、为ECharts准备一个具备（宽高）的Dom">2、为ECharts准备一个具备（宽高）的Dom</h2><p>可以是动态生成的。可以采用动态的javascript代码设置其大小属性值。</p>
+<h2 id="3、通过script标签引入echarts主文件">3、通过script标签引入echarts主文件</h2><h2 id="4、为模块加载器配置echarts的路径，从当前页面链接到echarts-js所在目录">4、为模块加载器配置echarts的路径，从当前页面链接到echarts.js所在目录</h2><h2 id="5、动态加载echarts及所需图表然后在回调函数中开始使用。">5、动态加载echarts及所需图表然后在回调函数中开始使用。</h2><p>echarts接口仅有一个方法init，执行init时传入一个具备大小（如果没有指定容器的大小将会按照0大小来处理即无法看到图表）的dom节点后即可实例化出图表对象，同一页面可多次init出多个图表对象。<br>当同一页面已经加载过echarts，再使用时直接require(‘echarts’).init(dom)即可。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"main"</span> <span class="attribute">style</span>=<span class="value">"height:400px;"</span>&gt;</span>   	</span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="comment">&lt;!-- 放置图表的位置 --&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"./js/echarts.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">        <span class="built_in">require</span>.config(&#123; <span class="comment">//配置echarts的路径</span></span><br><span class="line">            paths: &#123;</span><br><span class="line">                echarts: <span class="string">'./js/dist'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">require</span>(</span><br><span class="line">            [</span><br><span class="line">                <span class="string">'echarts'</span>,</span><br><span class="line">                <span class="string">'echarts/chart/line'</span>,   <span class="comment">// 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表</span></span><br><span class="line">                <span class="string">'echarts/chart/bar'</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="function"><span class="keyword">function</span> (<span class="params">ec</span>) </span>&#123;  <span class="comment">//回调函数</span></span><br><span class="line">                <span class="keyword">var</span> myChart = ec.init(<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>)); <span class="comment">//实例化出图表对象myChart</span></span><br><span class="line">                <span class="keyword">var</span> option = &#123;</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">                myChart.setOption(option);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// 再次使用</span></span><br><span class="line">		<span class="keyword">var</span> myChart2 = <span class="built_in">require</span>(<span class="string">'echarts'</span>).init(dom);</span><br><span class="line">		myChart.setOption(&#123;...&#125;);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>！<a href="http://7xo561.com1.z0.glb.clouddn.com/未来一周气温变化.png" target="_blank" rel="external">折线图</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://monovenu.com.io/2015/11/25/echarts/" data-id="cihfly6k4000x28i4rq4g1fxg" class="article-share-link" data-share="baidu" data-title="echarts 图表库入门">分享到</a>
+      
+
+ 
+
+       
+       
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" style="height:300px" data-thread-key="post-echarts" data-title="echarts 图表库入门" data-url="undefined"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"monovenu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/echarts/">echarts</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据可视化/">数据可视化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-jQuery-selector" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/20/jQuery-selector/" class="article-date">
@@ -111,7 +181,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/20/jQuery-selector/" data-id="cih8idvto000luoi41mvctsma" class="article-share-link" data-share="baidu" data-title="jQuery选择器">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/20/jQuery-selector/" data-id="cihfly6jo000l28i4snkq63tu" class="article-share-link" data-share="baidu" data-title="jQuery选择器">分享到</a>
       
 
  
@@ -195,7 +265,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cih8idvty000suoi4b8fjn3ra" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cihfly6jz000s28i4jnwyl57b" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
       
 
  
@@ -266,7 +336,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/16/jQuery代码风格/" data-id="cih8idvtl000guoi473k8k2gz" class="article-share-link" data-share="baidu" data-title="jQuery代码风格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/16/jQuery代码风格/" data-id="cihfly6jd000g28i4g7rdbmsf" class="article-share-link" data-share="baidu" data-title="jQuery代码风格">分享到</a>
       
 
  
@@ -355,7 +425,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/14/amd/" data-id="cih8idvsv0000uoi4t9orrs5h" class="article-share-link" data-share="baidu" data-title="AMD规范与require.js">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/14/amd/" data-id="cihfly6hl000028i4ygw29n5t" class="article-share-link" data-share="baidu" data-title="AMD规范与require.js">分享到</a>
       
 
  
@@ -443,7 +513,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/13/commonJs/" data-id="cih8idvub0018uoi4fon1avj4" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/13/commonJs/" data-id="cihfly6ki001d28i485jmjxtq" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
       
 
  
@@ -522,7 +592,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cih8idvti000cuoi4q2j5x97m" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cihfly6j9000c28i4pu0tk804" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
       
 
  
@@ -602,7 +672,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cih8idvte0007uoi4qovuuxhs" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihfly6j5000728i4jv12jfmp" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
       
 
  
@@ -679,7 +749,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cih8idvug001cuoi4ho7axpka" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihfly6km001h28i4pislc5x2" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
       
 
  
@@ -751,7 +821,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cih8idvu3000xuoi4lcfppi4a" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihfly6k9001228i4b4gs9uka" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
       
 
  
@@ -788,92 +858,10 @@ nameModule.printName();
 
 
   
-    <article id="post-index" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/10/17/index/" class="article-date">
-  <time datetime="2015-10-17T08:41:05.000Z" itemprop="datePublished">2015-10-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/17/index/">使用hexo+github搭建个人博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在折腾了两个工作日后，博主终于成功在gitHub上搭建起了个人博客，下面就将我的经验分享给大家。<br>以下的步骤参考自<a href="http://hifor.net/2015/07/01/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2-hexo-github/" target="_blank" rel="external">零基础免费搭建个人博客-hexo+github</a>和<a href="http://www.freehao123.com/" target="_blank" rel="external">免费资源部落</a></p>
-<p>本文根据亲手实践进行了修改和补充。在此感谢原文作者。</p>
-<h2 id="1、工具选择">1、工具选择</h2><p>经过博主的调研发现，在gitHub上搭建博客有两种方式: 一是Jekyll, 二是hexo。Jekyll方式使用起来较为繁琐，而hexo撰写博客的常用命令只有4个，所以博主选择了hexo方式。</p>
-<h2 id="2、环境准备">2、环境准备</h2><h3 id="安装git">安装git</h3><p>保险方式是安装Git v1.9.5，其他版本可能会出现问题<br>下载地址:<a href="http://pan.baidu.com/s/1c0rroje" target="_blank" rel="external">百度云</a><br>安装只有一点要注意下，如果是windows系统，需要<br><img src="http://7xo561.com1.z0.glb.clouddn.com/git.png" alt="git install"></p>
-<h3 id="安装node-js">安装node.js</h3><p>下载地址:<a href="http://pan.baidu.com/s/1o6opb9g" target="_blank" rel="external">百度云</a></p>
-<h2 id="3、验证软件安装正确">3、验证软件安装正确</h2><p>cmd<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> git --version</span><br><span class="line"><span class="number">2</span> node -v</span><br><span class="line"><span class="number">3</span> npm -v</span><br></pre></td></tr></table></figure></p>
-<p>看到版本号说明安装正确</p>
-<h2 id="4、申请GitHub账号">4、申请GitHub账号</h2><p>网上很多教程有提到，步骤也比较简单。</p>
-<h2 id="5、安装Hexo">5、安装Hexo</h2><h3 id="新建一个blog文件夹。右键之，选择Git_Bash">新建一个blog文件夹。右键之，选择Git Bash</h3><h3 id="安装npm">安装npm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo</span><br></pre></td></tr></table></figure>
-<p>或<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm --registry http://registry.cnpmjs.org info underscore</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装hexo">安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>接着输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install hexo --save</span><br></pre></td></tr></table></figure></p>
-<p>验证是否安装正确<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> -v</span><br></pre></td></tr></table></figure></p>
-<h2 id="6、本地运行hexo">6、本地运行hexo</h2><h3 id="初始化">初始化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> init</span><br></pre></td></tr></table></figure>
-<h3 id="安装生成器">安装生成器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install</span><br></pre></td></tr></table></figure>
-<h3 id="本地运行博客">本地运行博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> s</span><br></pre></td></tr></table></figure>
-<p>打开浏览器，输入localhost:4000<br>停止运行<br>按Ctrl+C键</p>
-<h2 id="7、发布博客">7、发布博客</h2><h3 id="打开blog/_config-yml文件，进行配置">打开blog/_config.yml文件，进行配置</h3><p><img src="http://7xo561.com1.z0.glb.clouddn.com/配置.png" alt="修改配置文件"><br><img src="http://7xo561.com1.z0.glb.clouddn.com/配置2.png" alt="修改配置文件"></p>
-<h3 id="安装hexo_git插件">安装hexo git插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<h3 id="使用Puttygen生成密钥">使用Puttygen生成密钥</h3><p>将用Puttygen生成的密钥复制到Github空间上。<br>接着在Puttygen中导出密钥到C:\Users\dell.ssh(dell换成自己的用户名)。</p>
-<h3 id="注意">注意</h3><p>在C:\Users\dell.ssh目录下的密钥文件要改名为默认名字<br>id_rsa， 否则ssh连接会失败。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/ssh.png" alt="修改密钥文件名"></p>
-<h3 id="发布更新博客">发布更新博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexo</span> d -g</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://monovenu.com.io/2015/10/17/index/" data-id="cih8idvtv000puoi4uxv4xg98" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
-      
-
- 
-
-       
-       
-  <section id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" style="height:300px" data-thread-key="post-index" data-title="使用hexo+github搭建个人博客" data-url="undefined"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"monovenu"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-    <!-- 多说公共JS代码 end -->
-  </section>
-
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </section>
       
@@ -885,7 +873,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -894,7 +882,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a>
+      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/echarts/" style="font-size: 10px;">echarts</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/数据可视化/" style="font-size: 10px;">数据可视化</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a>
     </div>
   </div>
 
@@ -903,7 +891,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -913,6 +901,10 @@ nameModule.printName();
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/25/echarts/">echarts 图表库入门</a>
+          </li>
         
           <li>
             <a href="/2015/11/20/jQuery-selector/">jQuery选择器</a>
@@ -928,10 +920,6 @@ nameModule.printName();
         
           <li>
             <a href="/2015/11/14/amd/">AMD规范与require.js</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/13/commonJs/">CommonJS规范</a>
           </li>
         
       </ul>
