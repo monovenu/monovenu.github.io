@@ -73,6 +73,78 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/22/cross-origin/" class="article-date">
+  <time datetime="2015-10-22T01:50:23.000Z" itemprop="datePublished">2015-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/22/cross-origin/">Ajax跨域方法总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="同源策略">同源策略</h2><p>为了安全，js脚本不能访问其他服务器的数据。<br>具体来说就是，域名、端口号、协议有一个不同就不能访问。</p>
+<h2 id="跨域">跨域</h2><p>做ajax读取数据的时候，经常会遇到ajax需要跨域的问题。跨域就是实现不同域名之间的通信，但对端口号和协议不同的情况无法解决。</p>
+<h2 id="跨域方法">跨域方法</h2><h3 id="1、img标签的开放策略">1、img标签的开放策略</h3><p>一个网页可以从任何网页加载图像，不存在跨域问题。<br>可以动态创建图像，侦听load事件来确定是否接收到响应。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img=<span class="keyword">new</span> Image();</span><br><span class="line">img.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="string">"hi"</span>);</span><br><span class="line">&#125;;</span><br><span class="line">img.src=<span class="string">"http://www.e.com/?name=Ni"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>这种方式的缺点是只能客户端向服务器端发送数据，客户端只能得到<br>服务器端返回的图片，得不到具体数据。所以通常用于统计点击页面次数。</p>
+<h3 id="2、JSONP">2、JSONP</h3><p>script类似于img,它的src属性也有开放策略，可以将数据放在其他域名的<br>js文件里，通过script标签加载js文件来访问数据。<br>在页面中创建script标签向不同域请求数据的方法就是JSONP.<br>假设在<a href="http://example1.com/index.php这个页面中向http://example2.com/getinfo.php提交GET请求，" target="_blank" rel="external">http://example1.com/index.php这个页面中向http://example2.com/getinfo.php提交GET请求，</a><br>我们可以将下面的JavaScript代码放在<a href="http://example1.com/index.php这个页面中来实现：" target="_blank" rel="external">http://example1.com/index.php这个页面中来实现：</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eleScript= <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">eleScript.type = <span class="string">"text/javascript"</span>;</span><br><span class="line">eleScript.src = <span class="string">"http://example2.com/getinfo.php"</span>;</span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"HEAD"</span>)[<span class="number">0</span>].appendChild(eleScript);</span><br></pre></td></tr></table></figure></p>
+<p>当GET请求从<a href="http://example2.com/getinfo.php返回时，可以返回一段JavaScript代码(JSONP)，这段代码会自动执行，可以用来负责调用http://example1.com/index.php页面中的一个callback函数。" target="_blank" rel="external">http://example2.com/getinfo.php返回时，可以返回一段JavaScript代码(JSONP)，这段代码会自动执行，可以用来负责调用http://example1.com/index.php页面中的一个callback函数。</a><br>jQuery中实现JSONP的方式如下：<br>首先在客户端注册一个callback,然后把callback的名字(如:jsonp1)传给服务器。<br>注意：服务端得到callback的数值后，要用jsonp1把将要输出的json内容包括起来，此时，服务器生成 json 数据才能被客户端正确接收。<br>然后以javascript语法的方式，生成一个function， function 名字就是传递上来的参数 ‘jsoncallback’的值 jsonp1.<br>最后将json数据直接以入参的方式，放置到 function 中，这样就生成了一段 js 语法的文档，返回给客户端。<br>客户端浏览器，解析script标签，并执行返回的 javascript 文档，此时javascript文档数据，作为参数， 传入到了客户端预先定义好的 callback 函数。</p>
+<h3 id="3、CORS">3、CORS</h3><p>W3C提供了跨域请求的标准方案（Cross-Origin Resource Sharing）。<br>IE8、Firefox 3.5+ 、Chrome浏览器、Safari 4 等已经实现了CORS规范。<br>在服务器响应客户端的时候，带上Access-Control-Allow-Origin头信息。<br>如果设置 Access-Control-Allow-Origin:*，则允许所有域名的脚本访问该资源。<br>Access-Control-Allow-Origin:<a href="http://www.baidu.com/允许特定的域名访问。" target="_blank" rel="external">http://www.baidu.com/允许特定的域名访问。</a><br>具体实现可以在Php中设置header()<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Access-control-Allow-Origin:*"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>遗憾的是IE8和IE9支持CORS要通过XDomainRequest对象,IE10开始则提供了原生支持。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihfw67ys00168ci4a47rzmji" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
+      
+
+ 
+
+       
+       
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" style="height:300px" data-thread-key="post-cross-origin" data-title="Ajax跨域方法总结" data-url="undefined"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"monovenu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CORS/">CORS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaScript/">javaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsonp/">jsonp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-index" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/10/17/index/" class="article-date">
@@ -122,7 +194,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/17/index/" data-id="cihfm5srv000pcsi4fqnw8050" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/17/index/" data-id="cihfw67yd000t8ci4uljfif75" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
       
 
  
@@ -174,7 +246,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiniUi/">MiniUi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -183,7 +255,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/echarts/" style="font-size: 10px;">echarts</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/数据可视化/" style="font-size: 10px;">数据可视化</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a>
+      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/MiniUi/" style="font-size: 10px;">MiniUi</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/echarts/" style="font-size: 10px;">echarts</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 20px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/数据可视化/" style="font-size: 10px;">数据可视化</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a>
     </div>
   </div>
 
@@ -192,7 +264,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -202,6 +274,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/26/miniui/">MiniUi for php初探</a>
+          </li>
         
           <li>
             <a href="/2015/11/25/echarts/">echarts 图表库入门</a>
@@ -217,10 +293,6 @@
         
           <li>
             <a href="/2015/11/16/jQuery代码风格/">jQuery代码风格</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/14/amd/">AMD规范与require.js</a>
           </li>
         
       </ul>

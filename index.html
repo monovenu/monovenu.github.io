@@ -73,6 +73,80 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-miniui" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/26/miniui/" class="article-date">
+  <time datetime="2015-11-26T06:03:07.000Z" itemprop="datePublished">2015-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/26/miniui/">MiniUi for php初探</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>jQuery MiniUI是一款能够快速实现界面开发的WebUI控件库。<br>下面就博主的亲手实践进行阶段性的总结。</p>
+<h2 id="1、下载安装">1、下载安装</h2><h3 id="安装phpStudy">安装phpStudy</h3><p>为方便本地运行和测试，可以安装phpStudy。<br>phpStudy集成了apache、mysql和php环境，<br>免除了繁琐的环境配置工作。</p>
+<h3 id="下载MiniUi">下载MiniUi</h3><p>官网下载MiniUi for php后将解压文件放在phpStudy的安装目录’D/www’下。<br>将解压文件中的dbsql（示例数据库sql文件）导入MySql.<br><img src="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126142305.png" alt="导入MySql"></p>
+<h2 id="2、运行示例">2、运行示例</h2><p>为使用MiniUi,开发者只需要引用jquery.js、miniui.js、miniui.css即可。<br>但示例中的做法是引用boot.js，再由boot.js引用上述几个文件。<br>请按localhost的方式访问demo文件夹下的示例。</p>
+<h2 id="3、编写CRUD页面">3、编写CRUD页面</h2><p>CRUD是指增加(Create)、读取(Retrieve)、更新(Update)和删除(Delete)。<br>在编写自己的页面时，博主建议修改boot.js中引用文件的目录，再在自己的文件中引用boot.js.</p>
+<h3 id="创建数据表格">创建数据表格</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"datagrid1"</span> <span class="attribute">class</span>=<span class="value">"mini-datagrid"</span> <span class="attribute">style</span>=<span class="value">"width:800px;height:280px;"</span> </span><br><span class="line">        <span class="attribute">url</span>=<span class="value">"demo/data/AjaxService.php?method=SearchEmployees"</span> <span class="attribute">idField</span>=<span class="value">"id"</span></span><br><span class="line">        <span class="attribute">allowResize</span>=<span class="value">"true"</span> <span class="attribute">pageSize</span>=<span class="value">"20"</span> </span><br><span class="line">        <span class="attribute">allowCellEdit</span>=<span class="value">"true"</span> <span class="attribute">allowCellSelect</span>=<span class="value">"true"</span> <span class="attribute">multiSelect</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">property</span>=<span class="value">"columns"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">type</span>=<span class="value">"checkcolumn"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>            </span><br><span class="line">		<span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"loginname"</span> <span class="attribute">width</span>=<span class="value">"120"</span> <span class="attribute">headerAlign</span>=<span class="value">"center"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span>&gt;</span>员工帐号</span><br><span class="line">			<span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-textbox"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">div</span>&gt;</span>                </span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"gender"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">renderer</span>=<span class="value">"onGenderRenderer"</span> <span class="attribute">align</span>=<span class="value">"center"</span> <span class="attribute">headerAlign</span>=<span class="value">"center"</span>&gt;</span>性别</span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-combobox"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span> <span class="attribute">data</span>=<span class="value">"Genders"</span>/&gt;</span>                </span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"age"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span> &gt;</span>年龄</span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-spinner"</span> <span class="attribute">minValue</span>=<span class="value">"0"</span> <span class="attribute">maxValue</span>=<span class="value">"200"</span> <span class="attribute">value</span>=<span class="value">"25"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"birthday"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span> <span class="attribute">dateFormat</span>=<span class="value">"yyyy-MM-dd"</span>&gt;</span>出生日期</span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-datepicker"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>    </span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"remarks"</span> <span class="attribute">width</span>=<span class="value">"120"</span> <span class="attribute">headerAlign</span>=<span class="value">"center"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span>&gt;</span>备注</span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-textarea"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span> <span class="attribute">minHeight</span>=<span class="value">"80"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="title">div</span>&gt;</span>                                 </span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"createtime"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">headerAlign</span>=<span class="value">"center"</span> <span class="attribute">dateFormat</span>=<span class="value">"yyyy-MM-dd"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span>&gt;</span>创建日期<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意外部div的类名为mini-datagrid, url对应为示例文件中的php,<br>allowCellEdit=”true”允许编辑单元格，allowResize=”true”允许用户改变表格大小。<br>内部div定义了表格的列。type=”checkcolumn”定义了选择列。<br>allowSort=”true”允许排序。input是单元格的编辑框。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126145332.png" alt="创建数据表格"></p>
+<h3 id="查找">查找</h3><p>编写查找框<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"padding-top:5px;padding-bottom:5px;"</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="title">span</span>&gt;</span>员工姓名：<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">id</span>=<span class="value">"key"</span>  /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"查找"</span> <span class="attribute">onclick</span>=<span class="value">"search()"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"Add"</span> <span class="attribute">onclick</span>=<span class="value">"addRow()"</span> <span class="attribute">style</span>=<span class="value">"margin-left:200px;"</span> /&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"Remove"</span> <span class="attribute">onclick</span>=<span class="value">"removeRow()"</span> /&gt;</span>   </span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"Save"</span> <span class="attribute">onclick</span>=<span class="value">"saveData()"</span> <span class="attribute">style</span>=<span class="value">"margin-left:100px;"</span>/&gt;</span>      </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126150043.png" alt="查找框"><br>查找代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> key = <span class="built_in">document</span>.getElementById(<span class="string">"key"</span>).value;</span><br><span class="line">    grid.load(&#123; key: key &#125;);</span><br><span class="line">&#125;</span><br><span class="line">   $(<span class="string">"#key"</span>).bind(<span class="string">"keyup"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (e.keyCode == <span class="number">13</span>) &#123;</span><br><span class="line">               search();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="保存数据">保存数据</h3><p>使用ajax.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = grid.getChanges();</span><br><span class="line">    <span class="keyword">var</span> json = mini.encode(data);</span><br><span class="line">    grid.loading(<span class="string">"保存中，请稍后......"</span>);        </span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: <span class="string">"demo/data/AjaxService.php?method=SaveEmployees"</span>,</span><br><span class="line">        data: &#123; data: json &#125;,</span><br><span class="line">        type: <span class="string">"post"</span>,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params">text</span>) </span>&#123;</span><br><span class="line">            grid.reload();</span><br><span class="line">        &#125;,</span><br><span class="line">        error: <span class="function"><span class="keyword">function</span> (<span class="params">jqXHR, textStatus, errorThrown</span>) </span>&#123;</span><br><span class="line">            alert(jqXHR.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://monovenu.com.io/2015/11/26/miniui/" data-id="cihfw67y1000g8ci4384bg2j2" class="article-share-link" data-share="baidu" data-title="MiniUi for php初探">分享到</a>
+      
+
+ 
+
+       
+       
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" style="height:300px" data-thread-key="post-miniui" data-title="MiniUi for php初探" data-url="undefined"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"monovenu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MiniUi/">MiniUi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-echarts" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/25/echarts/" class="article-date">
@@ -105,7 +179,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/25/echarts/" data-id="cihfm5ss4000xcsi44bck8lmu" class="article-share-link" data-share="baidu" data-title="echarts 图表库入门">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/25/echarts/" data-id="cihfw67yl00118ci435obijvn" class="article-share-link" data-share="baidu" data-title="echarts 图表库入门">分享到</a>
       
 
  
@@ -180,7 +254,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/20/jQuery-selector/" data-id="cihfm5srr000lcsi45lfujw5p" class="article-share-link" data-share="baidu" data-title="jQuery选择器">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/20/jQuery-selector/" data-id="cihfw67ya000p8ci44b1i51np" class="article-share-link" data-share="baidu" data-title="jQuery选择器">分享到</a>
       
 
  
@@ -264,7 +338,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cihfm5srz000scsi45bdqj19h" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cihfw67yh000w8ci4lidm77py" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
       
 
  
@@ -335,7 +409,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/16/jQuery代码风格/" data-id="cihfm5srm000gcsi442skdkpv" class="article-share-link" data-share="baidu" data-title="jQuery代码风格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/16/jQuery代码风格/" data-id="cihfw67y5000l8ci43tal4ln0" class="article-share-link" data-share="baidu" data-title="jQuery代码风格">分享到</a>
       
 
  
@@ -424,7 +498,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/14/amd/" data-id="cihfm5sqj0000csi4kmxbm5z3" class="article-share-link" data-share="baidu" data-title="AMD规范与require.js">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/14/amd/" data-id="cihfw67x100008ci486h4ubd1" class="article-share-link" data-share="baidu" data-title="AMD规范与require.js">分享到</a>
       
 
  
@@ -512,7 +586,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/13/commonJs/" data-id="cihfm5ssj001dcsi42zfuq6l7" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/13/commonJs/" data-id="cihfw67z0001h8ci4vfjkuzti" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
       
 
  
@@ -591,7 +665,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cihfm5srj000ccsi4aszjrfd6" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cihfw67xy000c8ci4oc0vaq5u" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
       
 
  
@@ -671,7 +745,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihfm5sre0007csi45kmf3cw8" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihfw67xu00078ci46dtb5kus" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
       
 
  
@@ -748,7 +822,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihfm5ssn001hcsi4e4l0oevw" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihfw67z4001l8ci4okfte6ph" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
       
 
  
@@ -785,78 +859,6 @@ nameModule.printName();
 
 
   
-    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/10/22/cross-origin/" class="article-date">
-  <time datetime="2015-10-22T01:50:23.000Z" itemprop="datePublished">2015-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/22/cross-origin/">Ajax跨域方法总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="同源策略">同源策略</h2><p>为了安全，js脚本不能访问其他服务器的数据。<br>具体来说就是，域名、端口号、协议有一个不同就不能访问。</p>
-<h2 id="跨域">跨域</h2><p>做ajax读取数据的时候，经常会遇到ajax需要跨域的问题。跨域就是实现不同域名之间的通信，但对端口号和协议不同的情况无法解决。</p>
-<h2 id="跨域方法">跨域方法</h2><h3 id="1、img标签的开放策略">1、img标签的开放策略</h3><p>一个网页可以从任何网页加载图像，不存在跨域问题。<br>可以动态创建图像，侦听load事件来确定是否接收到响应。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img=<span class="keyword">new</span> Image();</span><br><span class="line">img.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="string">"hi"</span>);</span><br><span class="line">&#125;;</span><br><span class="line">img.src=<span class="string">"http://www.e.com/?name=Ni"</span>;</span><br></pre></td></tr></table></figure></p>
-<p>这种方式的缺点是只能客户端向服务器端发送数据，客户端只能得到<br>服务器端返回的图片，得不到具体数据。所以通常用于统计点击页面次数。</p>
-<h3 id="2、JSONP">2、JSONP</h3><p>script类似于img,它的src属性也有开放策略，可以将数据放在其他域名的<br>js文件里，通过script标签加载js文件来访问数据。<br>在页面中创建script标签向不同域请求数据的方法就是JSONP.<br>假设在<a href="http://example1.com/index.php这个页面中向http://example2.com/getinfo.php提交GET请求，" target="_blank" rel="external">http://example1.com/index.php这个页面中向http://example2.com/getinfo.php提交GET请求，</a><br>我们可以将下面的JavaScript代码放在<a href="http://example1.com/index.php这个页面中来实现：" target="_blank" rel="external">http://example1.com/index.php这个页面中来实现：</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eleScript= <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">eleScript.type = <span class="string">"text/javascript"</span>;</span><br><span class="line">eleScript.src = <span class="string">"http://example2.com/getinfo.php"</span>;</span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"HEAD"</span>)[<span class="number">0</span>].appendChild(eleScript);</span><br></pre></td></tr></table></figure></p>
-<p>当GET请求从<a href="http://example2.com/getinfo.php返回时，可以返回一段JavaScript代码(JSONP)，这段代码会自动执行，可以用来负责调用http://example1.com/index.php页面中的一个callback函数。" target="_blank" rel="external">http://example2.com/getinfo.php返回时，可以返回一段JavaScript代码(JSONP)，这段代码会自动执行，可以用来负责调用http://example1.com/index.php页面中的一个callback函数。</a><br>jQuery中实现JSONP的方式如下：<br>首先在客户端注册一个callback,然后把callback的名字(如:jsonp1)传给服务器。<br>注意：服务端得到callback的数值后，要用jsonp1把将要输出的json内容包括起来，此时，服务器生成 json 数据才能被客户端正确接收。<br>然后以javascript语法的方式，生成一个function， function 名字就是传递上来的参数 ‘jsoncallback’的值 jsonp1.<br>最后将json数据直接以入参的方式，放置到 function 中，这样就生成了一段 js 语法的文档，返回给客户端。<br>客户端浏览器，解析script标签，并执行返回的 javascript 文档，此时javascript文档数据，作为参数， 传入到了客户端预先定义好的 callback 函数。</p>
-<h3 id="3、CORS">3、CORS</h3><p>W3C提供了跨域请求的标准方案（Cross-Origin Resource Sharing）。<br>IE8、Firefox 3.5+ 、Chrome浏览器、Safari 4 等已经实现了CORS规范。<br>在服务器响应客户端的时候，带上Access-Control-Allow-Origin头信息。<br>如果设置 Access-Control-Allow-Origin:*，则允许所有域名的脚本访问该资源。<br>Access-Control-Allow-Origin:<a href="http://www.baidu.com/允许特定的域名访问。" target="_blank" rel="external">http://www.baidu.com/允许特定的域名访问。</a><br>具体实现可以在Php中设置header()<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">"Access-control-Allow-Origin:*"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>遗憾的是IE8和IE9支持CORS要通过XDomainRequest对象,IE10开始则提供了原生支持。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihfm5ss90012csi4yf4lz71v" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
-      
-
- 
-
-       
-       
-  <section id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" style="height:300px" data-thread-key="post-cross-origin" data-title="Ajax跨域方法总结" data-url="undefined"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"monovenu"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-    <!-- 多说公共JS代码 end -->
-  </section>
-
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CORS/">CORS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaScript/">javaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsonp/">jsonp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -872,7 +874,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiniUi/">MiniUi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -881,7 +883,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/echarts/" style="font-size: 10px;">echarts</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 15px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/数据可视化/" style="font-size: 10px;">数据可视化</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a>
+      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/MiniUi/" style="font-size: 10px;">MiniUi</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/echarts/" style="font-size: 10px;">echarts</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 20px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/数据可视化/" style="font-size: 10px;">数据可视化</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a>
     </div>
   </div>
 
@@ -890,7 +892,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -900,6 +902,10 @@ nameModule.printName();
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/26/miniui/">MiniUi for php初探</a>
+          </li>
         
           <li>
             <a href="/2015/11/25/echarts/">echarts 图表库入门</a>
@@ -915,10 +921,6 @@ nameModule.printName();
         
           <li>
             <a href="/2015/11/16/jQuery代码风格/">jQuery代码风格</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/14/amd/">AMD规范与require.js</a>
           </li>
         
       </ul>

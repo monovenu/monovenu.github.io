@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MiniUi for php初探 | 刘洋鑫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="jQuery MiniUI是一款能够快速实现界面开发的WebUI控件库。下面就博主的亲手实践进行阶段性的总结。
+1、下载安装安装phpStudy为方便本地运行和测试，可以安装phpStudy。phpStudy集成了apache、mysql和php环境，免除了繁琐的环境配置工作。
+下载MiniUi官网下载MiniUi for php后将解压文件放在phpStudy的安装目录’D/www’下。将解压文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MiniUi for php初探">
+<meta property="og:url" content="http://monovenu.com.io/2015/11/26/miniui/index.html">
+<meta property="og:site_name" content="刘洋鑫的博客">
+<meta property="og:description" content="jQuery MiniUI是一款能够快速实现界面开发的WebUI控件库。下面就博主的亲手实践进行阶段性的总结。
+1、下载安装安装phpStudy为方便本地运行和测试，可以安装phpStudy。phpStudy集成了apache、mysql和php环境，免除了繁琐的环境配置工作。
+下载MiniUi官网下载MiniUi for php后将解压文件放在phpStudy的安装目录’D/www’下。将解压文">
+<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126142305.png">
+<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126145332.png">
+<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126150043.png">
+<meta property="og:updated_time" content="2015-11-26T07:03:49.320Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MiniUi for php初探">
+<meta name="twitter:description" content="jQuery MiniUI是一款能够快速实现界面开发的WebUI控件库。下面就博主的亲手实践进行阶段性的总结。
+1、下载安装安装phpStudy为方便本地运行和测试，可以安装phpStudy。phpStudy集成了apache、mysql和php环境，免除了繁琐的环境配置工作。
+下载MiniUi官网下载MiniUi for php后将解压文件放在phpStudy的安装目录’D/www’下。将解压文">
+  
+    <link rel="alternative" href="/atom.xml" title="刘洋鑫的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">刘洋鑫的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">刘洋鑫的前端学习心得</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="monovenu.com.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-miniui" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/26/miniui/" class="article-date">
+  <time datetime="2015-11-26T06:03:07.000Z" itemprop="datePublished">2015-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MiniUi for php初探
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>jQuery MiniUI是一款能够快速实现界面开发的WebUI控件库。<br>下面就博主的亲手实践进行阶段性的总结。</p>
+<h2 id="1、下载安装">1、下载安装</h2><h3 id="安装phpStudy">安装phpStudy</h3><p>为方便本地运行和测试，可以安装phpStudy。<br>phpStudy集成了apache、mysql和php环境，<br>免除了繁琐的环境配置工作。</p>
+<h3 id="下载MiniUi">下载MiniUi</h3><p>官网下载MiniUi for php后将解压文件放在phpStudy的安装目录’D/www’下。<br>将解压文件中的dbsql（示例数据库sql文件）导入MySql.<br><img src="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126142305.png" alt="导入MySql"></p>
+<h2 id="2、运行示例">2、运行示例</h2><p>为使用MiniUi,开发者只需要引用jquery.js、miniui.js、miniui.css即可。<br>但示例中的做法是引用boot.js，再由boot.js引用上述几个文件。<br>请按localhost的方式访问demo文件夹下的示例。</p>
+<h2 id="3、编写CRUD页面">3、编写CRUD页面</h2><p>CRUD是指增加(Create)、读取(Retrieve)、更新(Update)和删除(Delete)。<br>在编写自己的页面时，博主建议修改boot.js中引用文件的目录，再在自己的文件中引用boot.js.</p>
+<h3 id="创建数据表格">创建数据表格</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"datagrid1"</span> <span class="attribute">class</span>=<span class="value">"mini-datagrid"</span> <span class="attribute">style</span>=<span class="value">"width:800px;height:280px;"</span> </span><br><span class="line">        <span class="attribute">url</span>=<span class="value">"demo/data/AjaxService.php?method=SearchEmployees"</span> <span class="attribute">idField</span>=<span class="value">"id"</span></span><br><span class="line">        <span class="attribute">allowResize</span>=<span class="value">"true"</span> <span class="attribute">pageSize</span>=<span class="value">"20"</span> </span><br><span class="line">        <span class="attribute">allowCellEdit</span>=<span class="value">"true"</span> <span class="attribute">allowCellSelect</span>=<span class="value">"true"</span> <span class="attribute">multiSelect</span>=<span class="value">"true"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">property</span>=<span class="value">"columns"</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">type</span>=<span class="value">"checkcolumn"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>            </span><br><span class="line">		<span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"loginname"</span> <span class="attribute">width</span>=<span class="value">"120"</span> <span class="attribute">headerAlign</span>=<span class="value">"center"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span>&gt;</span>员工帐号</span><br><span class="line">			<span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-textbox"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">div</span>&gt;</span>                </span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"gender"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">renderer</span>=<span class="value">"onGenderRenderer"</span> <span class="attribute">align</span>=<span class="value">"center"</span> <span class="attribute">headerAlign</span>=<span class="value">"center"</span>&gt;</span>性别</span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-combobox"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span> <span class="attribute">data</span>=<span class="value">"Genders"</span>/&gt;</span>                </span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"age"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span> &gt;</span>年龄</span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-spinner"</span> <span class="attribute">minValue</span>=<span class="value">"0"</span> <span class="attribute">maxValue</span>=<span class="value">"200"</span> <span class="attribute">value</span>=<span class="value">"25"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"birthday"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span> <span class="attribute">dateFormat</span>=<span class="value">"yyyy-MM-dd"</span>&gt;</span>出生日期</span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-datepicker"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>    </span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"remarks"</span> <span class="attribute">width</span>=<span class="value">"120"</span> <span class="attribute">headerAlign</span>=<span class="value">"center"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span>&gt;</span>备注</span><br><span class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">property</span>=<span class="value">"editor"</span> <span class="attribute">class</span>=<span class="value">"mini-textarea"</span> <span class="attribute">style</span>=<span class="value">"width:100%;"</span> <span class="attribute">minHeight</span>=<span class="value">"80"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="title">div</span>&gt;</span>                                 </span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">field</span>=<span class="value">"createtime"</span> <span class="attribute">width</span>=<span class="value">"100"</span> <span class="attribute">headerAlign</span>=<span class="value">"center"</span> <span class="attribute">dateFormat</span>=<span class="value">"yyyy-MM-dd"</span> <span class="attribute">allowSort</span>=<span class="value">"true"</span>&gt;</span>创建日期<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意外部div的类名为mini-datagrid, url对应为示例文件中的php,<br>allowCellEdit=”true”允许编辑单元格，allowResize=”true”允许用户改变表格大小。<br>内部div定义了表格的列。type=”checkcolumn”定义了选择列。<br>allowSort=”true”允许排序。input是单元格的编辑框。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126145332.png" alt="创建数据表格"></p>
+<h3 id="查找">查找</h3><p>编写查找框<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"padding-top:5px;padding-bottom:5px;"</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="title">span</span>&gt;</span>员工姓名：<span class="tag">&lt;/<span class="title">span</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">id</span>=<span class="value">"key"</span>  /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"查找"</span> <span class="attribute">onclick</span>=<span class="value">"search()"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"Add"</span> <span class="attribute">onclick</span>=<span class="value">"addRow()"</span> <span class="attribute">style</span>=<span class="value">"margin-left:200px;"</span> /&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"Remove"</span> <span class="attribute">onclick</span>=<span class="value">"removeRow()"</span> /&gt;</span>   </span><br><span class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">value</span>=<span class="value">"Save"</span> <span class="attribute">onclick</span>=<span class="value">"saveData()"</span> <span class="attribute">style</span>=<span class="value">"margin-left:100px;"</span>/&gt;</span>      </span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xo561.com1.z0.glb.clouddn.com/QQ截图20151126150043.png" alt="查找框"><br>查找代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> key = <span class="built_in">document</span>.getElementById(<span class="string">"key"</span>).value;</span><br><span class="line">    grid.load(&#123; key: key &#125;);</span><br><span class="line">&#125;</span><br><span class="line">   $(<span class="string">"#key"</span>).bind(<span class="string">"keyup"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (e.keyCode == <span class="number">13</span>) &#123;</span><br><span class="line">               search();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="保存数据">保存数据</h3><p>使用ajax.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveData</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = grid.getChanges();</span><br><span class="line">    <span class="keyword">var</span> json = mini.encode(data);</span><br><span class="line">    grid.loading(<span class="string">"保存中，请稍后......"</span>);        </span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: <span class="string">"demo/data/AjaxService.php?method=SaveEmployees"</span>,</span><br><span class="line">        data: &#123; data: json &#125;,</span><br><span class="line">        type: <span class="string">"post"</span>,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params">text</span>) </span>&#123;</span><br><span class="line">            grid.reload();</span><br><span class="line">        &#125;,</span><br><span class="line">        error: <span class="function"><span class="keyword">function</span> (<span class="params">jqXHR, textStatus, errorThrown</span>) </span>&#123;</span><br><span class="line">            alert(jqXHR.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://monovenu.com.io/2015/11/26/miniui/" data-id="cihfw67y1000g8ci4384bg2j2" class="article-share-link" data-share="baidu" data-title="MiniUi for php初探">分享到</a>
+      
+
+ 
+
+       
+       
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" style="height:300px" data-thread-key="post-miniui" data-title="MiniUi for php初探" data-url="http://monovenu.com.io/2015/11/26/miniui/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"monovenu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MiniUi/">MiniUi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/25/echarts/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">echarts 图表库入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiniUi/">MiniUi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/MiniUi/" style="font-size: 10px;">MiniUi</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/echarts/" style="font-size: 10px;">echarts</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 20px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/数据可视化/" style="font-size: 10px;">数据可视化</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/11/26/miniui/">MiniUi for php初探</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/25/echarts/">echarts 图表库入门</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/20/jQuery-selector/">jQuery选择器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/http-code/">HTTP状态响应码与nginx</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/16/jQuery代码风格/">jQuery代码风格</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://themes.xiguabaobao.com/hexo%E5%85%8D%E8%B4%B9%E4%B8%BB%E9%A2%98%EF%BC%9Alandscape-plus/" target="_blank">Landscape-plus 主题使用须知</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 刘洋鑫<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <br />
+	    <span id="busuanzi_container_site_uv">
+	     本站访客数<span id="busuanzi_value_site_uv"></span>人次
+	    </span>
+    </div>
+
+
+    
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+<!-- 多说公共js代码 start -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"monovenu"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共js代码 end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
