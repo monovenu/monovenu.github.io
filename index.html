@@ -95,18 +95,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>开源的ECharts来自百度EFE数据可视化团队，可以以图表的方式将数据展现给用户。<br>引入echarts共有三种方式，模块化单文件引入是官方推荐的方式，可以实现按需加载，文件数目少，方便上线，本文只介绍这种方式，更多信息请参考<a href="http://echarts.baidu.com/index.html" target="_blank" rel="external">官方文档</a>.</p>
+        <p>开源的ECharts来自百度EFE数据可视化团队，可以以图表的方式将数据展现给用户。<br>引入echarts共有三种方式，模块化单文件引入是官方推荐的方式，可以实现按需加载，文件数目少，方便上线。<br>本文只介绍这种方式，更多信息请参考<a href="http://echarts.baidu.com/index.html" target="_blank" rel="external">官方文档</a>.</p>
 <h2 id="1、下载">1、下载</h2><p>从官网下载echarts解压后的”build/dist”目录下包含：<br>echarts.js :<br>这是包含AMD加载器的echarts主文件，需要通过script最先引入<br>chart（文件夹） :<br>对应每一个图表类型独立文件，根据应用需求可实现图表类型按需加载<br>line.js : 折线图（如需折柱动态类型切换，require时还需要echarts/chart/bar）<br>bar.js : 柱形图（如需折柱动态类型切换，require时还需要echarts/chart/line）<br>scatter.js : 散点图<br>k.js : K线图<br>pie.js :<br>radar.js : 雷达图<br>map.js : 地图<br>force.js : 力导向布局图<br>chord.js : 和弦图<br>funnel.js : 漏斗图<br>gauge.js : 仪表盘<br>eventRiver.js : 事件河流图<br>treemap.js : 矩阵树图<br>venn.js : 韦恩图</p>
 <p>“build/source”目录下的文件没有经过压缩，可用于调试。</p>
 <h2 id="2、为ECharts准备一个具备（宽高）的Dom">2、为ECharts准备一个具备（宽高）的Dom</h2><p>可以是动态生成的。可以采用动态的javascript代码设置其大小属性值。</p>
 <h2 id="3、通过script标签引入echarts主文件">3、通过script标签引入echarts主文件</h2><h2 id="4、为模块加载器配置echarts的路径，从当前页面链接到echarts-js所在目录">4、为模块加载器配置echarts的路径，从当前页面链接到echarts.js所在目录</h2><h2 id="5、动态加载echarts及所需图表然后在回调函数中开始使用。">5、动态加载echarts及所需图表然后在回调函数中开始使用。</h2><p>echarts接口仅有一个方法init，执行init时传入一个具备大小（如果没有指定容器的大小将会按照0大小来处理即无法看到图表）的dom节点后即可实例化出图表对象，同一页面可多次init出多个图表对象。<br>当同一页面已经加载过echarts，再使用时直接require(‘echarts’).init(dom)即可。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"main"</span> <span class="attribute">style</span>=<span class="value">"height:400px;"</span>&gt;</span>   	</span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="comment">&lt;!-- 放置图表的位置 --&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"./js/echarts.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">        <span class="built_in">require</span>.config(&#123; <span class="comment">//配置echarts的路径</span></span><br><span class="line">            paths: &#123;</span><br><span class="line">                echarts: <span class="string">'./js/dist'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">require</span>(</span><br><span class="line">            [</span><br><span class="line">                <span class="string">'echarts'</span>,</span><br><span class="line">                <span class="string">'echarts/chart/line'</span>,   <span class="comment">// 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表</span></span><br><span class="line">                <span class="string">'echarts/chart/bar'</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="function"><span class="keyword">function</span> (<span class="params">ec</span>) </span>&#123;  <span class="comment">//回调函数</span></span><br><span class="line">                <span class="keyword">var</span> myChart = ec.init(<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>)); <span class="comment">//实例化出图表对象myChart</span></span><br><span class="line">                <span class="keyword">var</span> option = &#123;</span><br><span class="line">                    ...</span><br><span class="line">                &#125;</span><br><span class="line">                myChart.setOption(option);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">        <span class="comment">// 再次使用</span></span><br><span class="line">		<span class="keyword">var</span> myChart2 = <span class="built_in">require</span>(<span class="string">'echarts'</span>).init(dom);</span><br><span class="line">		myChart.setOption(&#123;...&#125;);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>！<a href="http://7xo561.com1.z0.glb.clouddn.com/未来一周气温变化.png" target="_blank" rel="external">折线图</a></p>
+<p><img src="http://7xo561.com1.z0.glb.clouddn.com/未来一周气温变化.png" alt="折线图"></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/25/echarts/" data-id="cihfly6k4000x28i4rq4g1fxg" class="article-share-link" data-share="baidu" data-title="echarts 图表库入门">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/25/echarts/" data-id="cihfm4f6h000xdci41mperyn8" class="article-share-link" data-share="baidu" data-title="echarts 图表库入门">分享到</a>
       
 
  
@@ -181,7 +181,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/20/jQuery-selector/" data-id="cihfly6jo000l28i4snkq63tu" class="article-share-link" data-share="baidu" data-title="jQuery选择器">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/20/jQuery-selector/" data-id="cihfm4f65000ldci49oy3ouq5" class="article-share-link" data-share="baidu" data-title="jQuery选择器">分享到</a>
       
 
  
@@ -265,7 +265,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cihfly6jz000s28i4jnwyl57b" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cihfm4f6d000sdci4fael71fb" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
       
 
  
@@ -336,7 +336,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/16/jQuery代码风格/" data-id="cihfly6jd000g28i4g7rdbmsf" class="article-share-link" data-share="baidu" data-title="jQuery代码风格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/16/jQuery代码风格/" data-id="cihfm4f60000gdci48w6oixps" class="article-share-link" data-share="baidu" data-title="jQuery代码风格">分享到</a>
       
 
  
@@ -425,7 +425,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/14/amd/" data-id="cihfly6hl000028i4ygw29n5t" class="article-share-link" data-share="baidu" data-title="AMD规范与require.js">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/14/amd/" data-id="cihfm4f580000dci4t4fdmski" class="article-share-link" data-share="baidu" data-title="AMD规范与require.js">分享到</a>
       
 
  
@@ -513,7 +513,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/13/commonJs/" data-id="cihfly6ki001d28i485jmjxtq" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/13/commonJs/" data-id="cihfm4f6w001ddci4egb8qsvg" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
       
 
  
@@ -592,7 +592,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cihfly6j9000c28i4pu0tk804" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cihfm4f5x000cdci4sjs3fhkp" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
       
 
  
@@ -672,7 +672,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihfly6j5000728i4jv12jfmp" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihfm4f5t0007dci4g4vwcmwy" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
       
 
  
@@ -749,7 +749,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihfly6km001h28i4pislc5x2" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihfm4f71001hdci4p4w6xz0p" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
       
 
  
@@ -821,7 +821,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihfly6k9001228i4b4gs9uka" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihfm4f6l0012dci42k1gnwhd" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
       
 
  
