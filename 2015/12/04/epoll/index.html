@@ -4,17 +4,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | 刘洋鑫的博客</title>
+  <title>epoll | 刘洋鑫的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端 css javascript">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘洋鑫的博客">
-<meta property="og:url" content="http://monovenu.com.io/archives/2015/page/2/index.html">
+  <meta name="description" content="因为毕设的关系接触到epoll，查阅了很多资料，实践后，终于搞清楚了epoll的原理。本文大部分内容来自知乎蓝形参对epoll的回答感谢蓝形参的精彩回答。
+select前篇博文介绍了select属于IO多路复用。内核授权给代理select,让它监控多个流的I/O事件，在空闲的时候，会把当前进程阻塞掉，当有一个或多个流有I/O事件时，就从阻塞态中醒来，轮询一遍所有的流。
+select的不足之处在于我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="epoll">
+<meta property="og:url" content="http://monovenu.com.io/2015/12/04/epoll/index.html">
 <meta property="og:site_name" content="刘洋鑫的博客">
-<meta property="og:description" content="前端 css javascript">
+<meta property="og:description" content="因为毕设的关系接触到epoll，查阅了很多资料，实践后，终于搞清楚了epoll的原理。本文大部分内容来自知乎蓝形参对epoll的回答感谢蓝形参的精彩回答。
+select前篇博文介绍了select属于IO多路复用。内核授权给代理select,让它监控多个流的I/O事件，在空闲的时候，会把当前进程阻塞掉，当有一个或多个流有I/O事件时，就从阻塞态中醒来，轮询一遍所有的流。
+select的不足之处在于我">
+<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/eac4b74543a98226620f4c5c8a82b9014b90ebfb.jpg">
+<meta property="og:updated_time" content="2015-12-07T03:07:58.422Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘洋鑫的博客">
-<meta name="twitter:description" content="前端 css javascript">
+<meta name="twitter:title" content="epoll">
+<meta name="twitter:description" content="因为毕设的关系接触到epoll，查阅了很多资料，实践后，终于搞清楚了epoll的原理。本文大部分内容来自知乎蓝形参对epoll的回答感谢蓝形参的精彩回答。
+select前篇博文介绍了select属于IO多路复用。内核授权给代理select,让它监控多个流的I/O事件，在空闲的时候，会把当前进程阻塞掉，当有一个或多个流有I/O事件时，就从阻塞态中醒来，轮询一遍所有的流。
+select的不足之处在于我">
   
     <link rel="alternative" href="/atom.xml" title="刘洋鑫的博客" type="application/atom+xml">
   
@@ -71,96 +79,95 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/11/07/nineGrid/" class="archive-article-date">
-  <time datetime="2015-11-07T03:39:37.000Z" itemprop="datePublished">11月 7</time>
+      <section id="main"><article id="post-epoll" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/04/epoll/" class="article-date">
+  <time datetime="2015-12-04T03:23:31.000Z" itemprop="datePublished">2015-12-04</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/07/nineGrid/">用border-image制作九宫格</a>
+    <h1 class="article-title" itemprop="name">
+      epoll
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/10/28/clearfix/" class="archive-article-date">
-  <time datetime="2015-10-28T06:18:10.000Z" itemprop="datePublished">10月 28</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/28/clearfix/">清除浮动造成的影响</a>
-    </h1>
-  
+        <p>因为毕设的关系接触到epoll，查阅了很多资料，<br>实践后，终于搞清楚了epoll的原理。本文大部分内容来自<br><a href="http://www.zhihu.com/question/20122137/answer/14049112" target="_blank" rel="external">知乎蓝形参对epoll的回答</a>感谢蓝形参的精彩回答。</p>
+<h2 id="select">select</h2><p>前篇博文介绍了select属于IO多路复用。内核授权给代理select,<br>让它监控多个流的I/O事件，在空闲的时候，会把当前进程阻塞掉，当有一个或多个流有I/O事件时，就从阻塞态中醒来，轮询一遍所有的流。</p>
+<p>select的不足之处在于我们从select那里仅仅知道了，有I/O事件发生了，但却并不知道是那几个流（可能有一个，多个，甚至全部），我们只能无差别轮询所有流，找出能读出数据，或者写入数据的流，对他们进行操作。<br>使用select，我们有O(n)的无差别轮询复杂度，同时处理的流越多，每一次无差别轮询时间就越长。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/eac4b74543a98226620f4c5c8a82b9014b90ebfb.jpg" alt="问"></p>
+<h2 id="epoll">epoll</h2><p>epoll可以理解为event poll，不同于忙轮询和无差别轮询，epoll之会把哪个流发生了怎样的I/O事件通知我们。此时我们对这些流的操作都是有意义的。这意味着获取事件的时候，它无须遍历整个被侦听的描述符集，只要遍历那些被内核IO事件异步唤醒而加入Ready队列的描述符集合就行了。复杂度降低到了O(k)，k为产生I/O事件的流的个数。</p>
+<p>理解了上述原理也就不难理解epoll的优点了。epoll在处理大批量文件描述符时，也能保持高效。它能显著提高程序在大量并发连接中只有少量活跃的情况下的系统CPU利用率。epoll除了提供select/poll那种IO事件的水平触发（Level Triggered）外，还提供了边缘触发（Edge Triggered），这就使得用户空间程序有可能缓存IO状态，减少epoll_wait/epoll_pwait的调用，提高应用程序效率。</p>
+<p>epoll的相关操作：<br>•    epoll_create 创建一个epoll对象，一般epollfd = epoll_create()<br>•    epoll_ctl （epoll_add/epoll_del的合体），往epoll对象中增加/删除某一个流的某一个事件<br>比如<br>epoll_ctl(epollfd, EPOLL_CTL_ADD, socket, EPOLLIN);//有缓冲区内有数据时epoll_wait返回<br>epoll_ctl(epollfd, EPOLL_CTL_DEL, socket, EPOLLOUT);//缓冲区可写入时epoll_wait返回<br>•    epoll_wait(epollfd,…)等待直到注册的事件发生<br>（epoll只关心缓冲区非满和缓冲区非空事件）。<br>一个epoll模式的代码大概的样子是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">true</span> &#123;</span><br><span class="line">active_stream[] = epoll_<span class="built_in">wait</span>(epollfd)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> active_stream[] &#123;</span><br><span class="line"><span class="built_in">read</span> or write till unavailable</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/10/22/cross-origin/" class="archive-article-date">
-  <time datetime="2015-10-22T01:50:23.000Z" itemprop="datePublished">10月 22</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/22/cross-origin/">Ajax跨域方法总结</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/10/17/index/" class="archive-article-date">
-  <time datetime="2015-10-17T08:41:05.000Z" itemprop="datePublished">10月 17</time>
-</a>
+    </div>
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/17/index/">使用hexo+github搭建个人博客</a>
-    </h1>
-  
+        <a data-url="http://monovenu.com.io/2015/12/04/epoll/" data-id="cihvclltx0016e4i4wdxlb19v" class="article-share-link" data-share="baidu" data-title="epoll">分享到</a>
+      
 
-    </header>
+ 
+
+       
+       
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" style="height:300px" data-thread-key="post-epoll" data-title="epoll" data-url="http://monovenu.com.io/2015/12/04/epoll/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"monovenu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/epoll/">epoll</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/07/网络IO模型/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          网络IO模型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/26/miniui/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">MiniUi for php初探</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 </section>
       
       <aside id="sidebar">
