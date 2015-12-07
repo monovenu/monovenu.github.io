@@ -4,17 +4,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: javaScript | 刘洋鑫的博客</title>
+  <title>jQuery版本问题 | 刘洋鑫的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端 css javascript">
-<meta property="og:type" content="website">
-<meta property="og:title" content="刘洋鑫的博客">
-<meta property="og:url" content="http://monovenu.com.io/tags/javaScript/index.html">
+  <meta name="description" content="博主这两天写代码被jQuery的版本更迭给坑了，有些方法在jQuery 1.9之后不再支持，比如toggle切换函数。以后写代码一定要注意现有的版本是否支持该方法，及时关注版本更新带来的改变。
+jQuery 2.xjQuery 2.0 不再支持IE 6/7/8 了，但是 jQuery 1.9 会继续支持。jQuery 团队将同时支持 jQuery 1.x 和 2.x 。1.9 和 2.0 版的 A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery版本问题">
+<meta property="og:url" content="http://monovenu.com.io/2015/12/08/jQuery版本问题/index.html">
 <meta property="og:site_name" content="刘洋鑫的博客">
-<meta property="og:description" content="前端 css javascript">
+<meta property="og:description" content="博主这两天写代码被jQuery的版本更迭给坑了，有些方法在jQuery 1.9之后不再支持，比如toggle切换函数。以后写代码一定要注意现有的版本是否支持该方法，及时关注版本更新带来的改变。
+jQuery 2.xjQuery 2.0 不再支持IE 6/7/8 了，但是 jQuery 1.9 会继续支持。jQuery 团队将同时支持 jQuery 1.x 和 2.x 。1.9 和 2.0 版的 A">
+<meta property="og:updated_time" content="2015-12-07T10:03:55.558Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘洋鑫的博客">
-<meta name="twitter:description" content="前端 css javascript">
+<meta name="twitter:title" content="jQuery版本问题">
+<meta name="twitter:description" content="博主这两天写代码被jQuery的版本更迭给坑了，有些方法在jQuery 1.9之后不再支持，比如toggle切换函数。以后写代码一定要注意现有的版本是否支持该方法，及时关注版本更新带来的改变。
+jQuery 2.xjQuery 2.0 不再支持IE 6/7/8 了，但是 jQuery 1.9 会继续支持。jQuery 团队将同时支持 jQuery 1.x 和 2.x 。1.9 和 2.0 版的 A">
   
     <link rel="alternative" href="/atom.xml" title="刘洋鑫的博客" type="application/atom+xml">
   
@@ -71,39 +75,85 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/10/22/cross-origin/" class="archive-article-date">
-  <time datetime="2015-10-22T01:50:23.000Z" itemprop="datePublished">10月 22</time>
+      <section id="main"><article id="post-jQuery版本问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/08/jQuery版本问题/" class="article-date">
+  <time datetime="2015-12-08T09:47:23.000Z" itemprop="datePublished">2015-12-08</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/22/cross-origin/">Ajax跨域方法总结</a>
+    <h1 class="article-title" itemprop="name">
+      jQuery版本问题
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>博主这两天写代码被jQuery的版本更迭给坑了，有些方法在jQuery 1.9之后不再支持，<br>比如toggle切换函数。以后写代码一定要注意现有的版本是否支持该方法，及时关注版本更新带来的改变。</p>
+<h2 id="jQuery_2-x">jQuery 2.x</h2><p>jQuery 2.0 不再支持IE 6/7/8 了，但是 jQuery 1.9 会继续支持。<br>jQuery 团队将同时支持 jQuery 1.x 和 2.x 。1.9 和 2.0 版的 API 是相同的。<br>现在jQuery 1.x最新的是jQuery 1.11.4, jQuery 2.x最新的是jQuery 2.1.3.<br>1.9 和 2.0 版的 API 是相同的。那按推论1.10和2.1的 API 是相同的。但是1.11已经出世了，<br>2.x还没有对应的版本。感觉有点混乱呢，不过不用担心，jQuery团队在他们的博客上给出了一个方案。</p>
+<h2 id="jQuery_3-x">jQuery 3.x</h2><p>原文如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Our next releases will use a different nomenclature. As before, there will be two different released files. The successor to what is now version <span class="number">1.11</span>.<span class="number">1</span> will become jQuery Compat <span class="number">3.0</span>. The successor to jQuery <span class="number">2.1</span>.<span class="number">1</span> will be jQuery <span class="number">3.0</span>. There are two different packages on npm and Bower, but they share the same version to indicate they have the same API behavior.</span><br></pre></td></tr></table></figure></p>
+<p>意思就是：我们下次发布将使用新的版本系统。1.x的继任者将是jQuery Compat 3.0，<br>2.x的继任者将是jQuery 3.0，他们将使用相同的版本号表明他们拥有相同的API。<br>这就清楚了，以后看到jQuery Compat 3.1，就知道和他拥有相同的API的版本是jQuery 3.1。</p>
+<h2 id="稳定版本">稳定版本</h2><p>版本号最末一位数字，如jQuery 1.11.4的4表示jQuery 1.11的第四版，一般是修复了一些BUG，<br>所以最新版本的上一版本是稳定无错的，比如jQuery 1.10.4。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://monovenu.com.io/2015/12/08/jQuery版本问题/" data-id="cihvsjgd6000quki41sqzt19k" class="article-share-link" data-share="baidu" data-title="jQuery版本问题">分享到</a>
+      
+
+ 
+
+       
+       
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" style="height:300px" data-thread-key="post-jQuery版本问题" data-title="jQuery版本问题" data-url="http://monovenu.com.io/2015/12/08/jQuery版本问题/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"monovenu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本控制/">版本控制</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/12/07/epoll/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">epoll</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 </section>
       
       <aside id="sidebar">

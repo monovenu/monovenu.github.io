@@ -73,6 +73,85 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-module" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/12/module/" class="article-date">
+  <time datetime="2015-11-12T08:41:05.000Z" itemprop="datePublished">2015-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/12/module/">Javascript模块化编程：模块的写法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>博主最近在学习Javascript模块化，看到<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">阮一峰写的博文</a>浅显易懂，稍作修改后转载如下：<br>现如今，前端程序越来越庞大，需要一个团队分工协作、进度管理、单元测试等等。<br>Javascript模块化编程，已经成为一个迫切的需求。<br>理想情况下，开发者只需要实现核心的业务逻辑，其他都可以加载别人已经写好的模块。</p>
+<h2 id="1、函数写法">1、函数写法</h2><p>模块就是实现特定功能的一组方法。<br>把几个函数放在一起就是一个模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">m1</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">m2</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>缺点是”污染”了全局变量，无法保证不与其他模块发生变量名冲突，而且模块成员之间看不出直接关系。</p>
+<h2 id="2、对象写法">2、对象写法</h2><p>为了解决上面的缺点，可以把模块写成一个对象，所有的模块成员都放到这个对象里面。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">　　var module1 = new Object(&#123;</span><br><span class="line">　　　　_count : <span class="number">0</span>,</span><br><span class="line">　　　　m1 : <span class="function"><span class="title">function</span></span> ()&#123;</span><br><span class="line">　　　　　　//...</span><br><span class="line">　　　　&#125;,</span><br><span class="line">　　　　m2 : <span class="function"><span class="title">function</span></span> ()&#123;</span><br><span class="line">　　　　　　//...</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上面的函数m1()和m2()，都封装在module1对象里。使用的时候，就是调用这个对象的属性。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　module1.m1();</span><br></pre></td></tr></table></figure></p>
+<p>但是，这样的写法会暴露所有模块成员，内部状态可以被外部改写。<br>比如，外部代码可以直接改变内部计数器的值。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　module1._count = <span class="number">5</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3、匿名函数立即执行写法">3、匿名函数立即执行写法</h2><p>使用”匿名函数立即执行”，可以达到不暴露私有成员的目的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">　　var module1 = (<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">　　　　var _count = <span class="number">0</span>;</span><br><span class="line">　　　　var m1 = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">　　　　　　//...</span><br><span class="line">　　　　&#125;;</span><br><span class="line">　　　　var m2 = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">　　　　　　//...</span><br><span class="line">　　　　&#125;;</span><br><span class="line">　　　　<span class="built_in">return</span> &#123;</span><br><span class="line">　　　　　　m1 : m1,</span><br><span class="line">　　　　　　m2 : m2</span><br><span class="line">　　　　&#125;;</span><br><span class="line">　　&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>因为返回的module1对象中不包含_count变量，所有外部代码无法读取内部的_count。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　console.info(module1._count); //undefined</span><br></pre></td></tr></table></figure></p>
+<p>module1就是Javascript模块的基本写法。下面，再对这种写法进行加工。</p>
+<h2 id="4、放大模式">4、放大模式</h2><p>如果想要实现模块之间的继承，可以采用”放大模式”。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　var module1 = (<span class="keyword">function</span> (mod)&#123;</span><br><span class="line">　　　　mod.m3 = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">　　　　　　//...</span><br><span class="line">　　　　&#125;;</span><br><span class="line">　　　　<span class="built_in">return</span> mod;</span><br><span class="line">　　&#125;)(module1);</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码为module1模块添加了一个新方法m3()，然后返回新的module1模块。</p>
+<h2 id="5、宽放大模式">5、宽放大模式</h2><p>在浏览器环境中，模块的各个部分通常都是从网上获取的，有时无法知道哪个部分会先加载。<br>如果采用上一节的写法，第一个执行的部分有可能加载一个不存在空对象，这时就要采用”宽放大模式”。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">　　var module1 = ( <span class="keyword">function</span> (mod)&#123;</span><br><span class="line">　　　　//...</span><br><span class="line">&#125;</span><br><span class="line">　　　　<span class="built_in">return</span> mod;</span><br><span class="line">　　&#125;)(window.module1 || &#123;&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>与”放大模式”相比，＂宽放大模式＂就是在模块不存在时，<br>向”立即执行匿名函数”的参数传入空对象。</p>
+<h2 id="6、输入全局变量">6、输入全局变量</h2><p>独立性是模块的重要特点，模块内部最好不与程序的其他部分直接交互。<br>为了在模块内部调用全局变量，必须显式地将其他变量输入模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　var module1 = (<span class="keyword">function</span> ($, YAHOO) &#123;</span><br><span class="line">　　　　//...</span><br><span class="line">　　&#125;)(jQuery, YAHOO);</span><br></pre></td></tr></table></figure></p>
+<p>上面的module1模块需要使用jQuery库和YUI库，就把这两个库（其实是两个模块）当作参数输入module1。这样做除了保证模块的独立性，还使得模块之间的依赖关系变得明显。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cihvsjgcw000huki4wl0u24w2" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
+      
+
+ 
+
+       
+       
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" style="height:300px" data-thread-key="post-module" data-title="Javascript模块化编程：模块的写法" data-url="undefined"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"monovenu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块化/">模块化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-nineGrid" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/07/nineGrid/" class="article-date">
@@ -116,7 +195,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihvl6vs6000cpoi4jqtb03ou" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihvsjgct000cuki4njaumnq3" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
       
 
  
@@ -193,7 +272,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihvl6vtg001vpoi4otdeju08" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihvsjgea001zuki4jd5avfjt" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
       
 
  
@@ -265,7 +344,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihvl6vtg001gpoi4hw1o5et4" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihvsjge1001kuki4963yiadj" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
       
 
  
@@ -351,7 +430,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/17/index/" data-id="cihvl6vsl000ypoi498te3imz" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/17/index/" data-id="cihvsjgdi0012uki4xwly4g9l" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
       
 
  
@@ -403,7 +482,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiniUi/">MiniUi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/epoll/">epoll</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阻塞/">阻塞</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CORS/">CORS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MiniUi/">MiniUi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/after伪元素/">after伪元素</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amd/">amd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/border-image/">border-image</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/echarts/">echarts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/epoll/">epoll</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript/">javaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/require-js/">require.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格/">九宫格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码风格/">代码风格</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据可视化/">数据可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块化/">模块化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除浮动/">清除浮动</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本控制/">版本控制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/选择器/">选择器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阻塞/">阻塞</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -412,7 +491,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/MiniUi/" style="font-size: 10px;">MiniUi</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/echarts/" style="font-size: 10px;">echarts</a> <a href="/tags/epoll/" style="font-size: 10px;">epoll</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 20px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步/" style="font-size: 10px;">异步</a> <a href="/tags/数据可视化/" style="font-size: 10px;">数据可视化</a> <a href="/tags/模块化/" style="font-size: 20px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a> <a href="/tags/阻塞/" style="font-size: 10px;">阻塞</a>
+      <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/CORS/" style="font-size: 10px;">CORS</a> <a href="/tags/CommonJS/" style="font-size: 10px;">CommonJS</a> <a href="/tags/HTTP响应码/" style="font-size: 10px;">HTTP响应码</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/MiniUi/" style="font-size: 10px;">MiniUi</a> <a href="/tags/after伪元素/" style="font-size: 10px;">after伪元素</a> <a href="/tags/amd/" style="font-size: 10px;">amd</a> <a href="/tags/border-image/" style="font-size: 10px;">border-image</a> <a href="/tags/echarts/" style="font-size: 10px;">echarts</a> <a href="/tags/epoll/" style="font-size: 10px;">epoll</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/jQuery/" style="font-size: 20px;">jQuery</a> <a href="/tags/javaScript/" style="font-size: 10px;">javaScript</a> <a href="/tags/jsonp/" style="font-size: 10px;">jsonp</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/require-js/" style="font-size: 10px;">require.js</a> <a href="/tags/九宫格/" style="font-size: 10px;">九宫格</a> <a href="/tags/代码风格/" style="font-size: 10px;">代码风格</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/异步/" style="font-size: 10px;">异步</a> <a href="/tags/数据可视化/" style="font-size: 10px;">数据可视化</a> <a href="/tags/模块化/" style="font-size: 15px;">模块化</a> <a href="/tags/清除浮动/" style="font-size: 10px;">清除浮动</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/选择器/" style="font-size: 10px;">选择器</a> <a href="/tags/阻塞/" style="font-size: 10px;">阻塞</a>
     </div>
   </div>
 
@@ -421,7 +500,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -431,6 +510,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/12/08/jQuery版本问题/">jQuery版本问题</a>
+          </li>
         
           <li>
             <a href="/2015/12/07/epoll/">epoll</a>
@@ -446,10 +529,6 @@
         
           <li>
             <a href="/2015/11/25/echarts/">echarts 图表库入门</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/20/jQuery-selector/">jQuery选择器</a>
           </li>
         
       </ul>
