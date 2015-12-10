@@ -4,33 +4,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>HTTP状态响应码与nginx | 刘洋鑫的博客</title>
+  <title>jQuery版本问题 | 刘洋鑫的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HTTP状态响应码表示服务器对于客户端的HTTP请求的响应状态。
-1、1xx 消息代表请求已被接受，需要继续处理。
-2、2xx 成功200 OK请求成功
-201 Created请求的资源已经被创建
-202 Accepted请求被接受，但服务器还未进行进一步的操作。不能保证最终请求会成功。
-3、3xx 重定向这类状态码代表需要客户端使用替代地址访问资源。后续的请求地址（重定向目标）在本次响应的 Lo">
+  <meta name="description" content="博主这两天写代码被jQuery的版本更迭给坑了，有些方法在jQuery 1.9之后不再支持，比如toggle切换函数。以后写代码一定要注意现有的版本是否支持该方法，及时关注版本更新带来的改变。
+jQuery 2.xjQuery 2.0 不再支持IE 6/7/8 了，但是 jQuery 1.9 会继续支持。jQuery 团队将同时支持 jQuery 1.x 和 2.x 。1.9 和 2.0 版的 A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP状态响应码与nginx">
-<meta property="og:url" content="http://monovenu.com.io/2015/11/19/http-code/index.html">
+<meta property="og:title" content="jQuery版本问题">
+<meta property="og:url" content="http://monovenu.com.io/2015/12/08/jQuery版本问题/index.html">
 <meta property="og:site_name" content="刘洋鑫的博客">
-<meta property="og:description" content="HTTP状态响应码表示服务器对于客户端的HTTP请求的响应状态。
-1、1xx 消息代表请求已被接受，需要继续处理。
-2、2xx 成功200 OK请求成功
-201 Created请求的资源已经被创建
-202 Accepted请求被接受，但服务器还未进行进一步的操作。不能保证最终请求会成功。
-3、3xx 重定向这类状态码代表需要客户端使用替代地址访问资源。后续的请求地址（重定向目标）在本次响应的 Lo">
-<meta property="og:updated_time" content="2015-11-20T02:18:17.678Z">
+<meta property="og:description" content="博主这两天写代码被jQuery的版本更迭给坑了，有些方法在jQuery 1.9之后不再支持，比如toggle切换函数。以后写代码一定要注意现有的版本是否支持该方法，及时关注版本更新带来的改变。
+jQuery 2.xjQuery 2.0 不再支持IE 6/7/8 了，但是 jQuery 1.9 会继续支持。jQuery 团队将同时支持 jQuery 1.x 和 2.x 。1.9 和 2.0 版的 A">
+<meta property="og:image" content="http://7xo561.com1.z0.glb.clouddn.com/37d12f2eb9389b507400922b8735e5dde6116ecf.jpg">
+<meta property="og:updated_time" content="2015-12-10T01:42:41.775Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP状态响应码与nginx">
-<meta name="twitter:description" content="HTTP状态响应码表示服务器对于客户端的HTTP请求的响应状态。
-1、1xx 消息代表请求已被接受，需要继续处理。
-2、2xx 成功200 OK请求成功
-201 Created请求的资源已经被创建
-202 Accepted请求被接受，但服务器还未进行进一步的操作。不能保证最终请求会成功。
-3、3xx 重定向这类状态码代表需要客户端使用替代地址访问资源。后续的请求地址（重定向目标）在本次响应的 Lo">
+<meta name="twitter:title" content="jQuery版本问题">
+<meta name="twitter:description" content="博主这两天写代码被jQuery的版本更迭给坑了，有些方法在jQuery 1.9之后不再支持，比如toggle切换函数。以后写代码一定要注意现有的版本是否支持该方法，及时关注版本更新带来的改变。
+jQuery 2.xjQuery 2.0 不再支持IE 6/7/8 了，但是 jQuery 1.9 会继续支持。jQuery 团队将同时支持 jQuery 1.x 和 2.x 。1.9 和 2.0 版的 A">
   
     <link rel="alternative" href="/atom.xml" title="刘洋鑫的博客" type="application/atom+xml">
   
@@ -87,10 +76,10 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-http-code" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-jQuery版本问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/19/http-code/" class="article-date">
-  <time datetime="2015-11-19T07:59:15.000Z" itemprop="datePublished">2015-11-19</time>
+    <a href="/2015/12/08/jQuery版本问题/" class="article-date">
+  <time datetime="2015-12-08T09:47:23.000Z" itemprop="datePublished">2015-12-08</time>
 </a>
     
   </div>
@@ -101,7 +90,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      HTTP状态响应码与nginx
+      jQuery版本问题
     </h1>
   
 
@@ -109,32 +98,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>HTTP状态响应码表示服务器对于客户端的HTTP请求的响应状态。</p>
-<h2 id="1、1xx_消息">1、1xx 消息</h2><p>代表请求已被接受，需要继续处理。</p>
-<h2 id="2、2xx_成功">2、2xx 成功</h2><h3 id="200_OK">200 OK</h3><p>请求成功</p>
-<h3 id="201_Created">201 Created</h3><p>请求的资源已经被创建</p>
-<h3 id="202_Accepted">202 Accepted</h3><p>请求被接受，但服务器还未进行进一步的操作。不能保证最终请求会成功。</p>
-<h2 id="3、3xx_重定向">3、3xx 重定向</h2><p>这类状态码代表需要客户端使用替代地址访问资源。后续的请求地址（重定向目标）在本次响应的 Location 域中指明。</p>
-<h3 id="300_Multiple_Choices">300 Multiple Choices</h3><p>被请求的资源有一系列可供选择的版本，每个都有自己特定的地址。用户或浏览器能够自行选择一个首选的地址进行重定向。<br>除非这是一个 HEAD 请求，否则该响应应当包括一个资源特性及地址的列表的实体，以便用户或浏览器从中选择最合适的重定向地址。这个实体的格式由 Content-Type 定义的格式所决定。浏览器可能根据响应的格式以及浏览器自身能力，自动作出最合适的选择。<br>如果服务器本身有了首选地址，在 Location 中应当指明首选的 URI。</p>
-<h3 id="301_Moved_Permanently">301 Moved Permanently</h3><p>永久重定向。被请求的资源已永久移动到新位置。<br>新的永久性的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI的超链接及简短说明。</p>
-<h3 id="302_Found">302 Found</h3><p>临时重定向。请求的资源现在临时从不同的 URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。</p>
-<h3 id="303_See_Other">303 See Other</h3><p>类似于302. 用于重定向POST请求到一个新的资源。而且客户端应当采用 GET 的方式访问那个资源。</p>
-<h3 id="304_Not_Modified">304 Not Modified</h3><p>资源未修改，从浏览器缓存中获取资源。</p>
-<h3 id="305_Use_Proxy">305 Use Proxy</h3><p>被请求的资源必须通过指定的代理才能被访问。 Location 域中将给出指定的代理所在的 URI 信息。</p>
-<h3 id="307_Temporary_Redirect">307 Temporary Redirect</h3><p>类似于302。</p>
-<h2 id="4、4xx_请求错误">4、4xx 请求错误</h2><p>这类的状态码代表了客户端可能发生了错误。</p>
-<h3 id="400_Bad_Request">400 Bad Request</h3><p>语义有误或者请求参数有误。<br>在nginx中的400错误是因为请求报文实体过大，实体过大，通常是由于cookie中写入了较大的值所引起。解决方法是在nginx.conf中，将client_header_buffer_size和large_client_header_buffers都调大。</p>
-<h3 id="401_Unauthorized">401 Unauthorized</h3><p>当前请求需要验证客户端。该响应必须包含一个适用于被请求资源的 WWW-Authenticate 信息头用以询问用户信息。客户端可以重复提交一个包含恰当的 Authorization 头信息的请求。<br>如果当前请求已经包含了 Authorization 证书，那么401响应代表着服务器验证已经拒绝了那些证书。<br>比如在Nginx下对网站进行密码保护。可以更改网站的Nginx的server配置，创建htpasswd文件保存密码，它和nginx.conf在同一级目录。</p>
-<h3 id="403_Forbidden">403 Forbidden</h3><p>服务器已经理解请求，但是拒绝执行它。<br>nginx出现403 forbidden最常见的原因是权限配置不正确。<br>为了保证文件能正确执行，nginx既需要文件的读权限,又需要文件所有父目录的可执行权限。<br>例如，当访问/usr/local/nginx/html/image.jpg时，nginx既需要image.jpg文件的可读权限，<br>也需要/,/usr,/usr/local,/usr/local/nginx,/usr/local/nginx/html的可以执行权限。<br>解决办法:设置所有父目录为755权限，设置文件为644权限可以避免权限不正确。</p>
-<h3 id="404_Not_Found">404 Not Found</h3><p>请求失败，url错误，请求所希望得到的资源未被在服务器上发现。<br>NGINX可以自定义404页面。方法是<br>1.创建自己的404.html页面<br>2.更改nginx.conf在http定义区域加入： fastcgi_intercept_errors on;<br>3.更改nginx.conf中在server区域加入： error_page 404  /404.html  或者 error_page 404 =<a href="http://www.xxx.com/404.html" target="_blank" rel="external">http://www.xxx.com/404.html</a><br>4.更改后重启nginx,，测试nginx.conf正确性： /opt/nginx/sbin/nginx –t</p>
-<h2 id="5、5xx_服务器错误">5、5xx 服务器错误</h2><p>这类状态码代表了服务器在处理请求的过程中有错误发生，也有可能是服务器意识到以当前的软硬件资源无法完成对请求的处理。</p>
-<h3 id="500_Internal_Server_Error">500 Internal Server Error</h3><p>服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。<br>nginx下出现500错误可能是硬盘空间满了或者nginx配置文件错误。</p>
+        <p>博主这两天写代码被jQuery的版本更迭给坑了，有些方法在jQuery 1.9之后不再支持，<br>比如toggle切换函数。以后写代码一定要注意现有的版本是否支持该方法，及时关注版本更新带来的改变。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/37d12f2eb9389b507400922b8735e5dde6116ecf.jpg" alt="jQuery"></p>
+<h2 id="jQuery_2-x">jQuery 2.x</h2><p>jQuery 2.0 不再支持IE 6/7/8 了，但是 jQuery 1.9 会继续支持。<br>jQuery 团队将同时支持 jQuery 1.x 和 2.x 。1.9 和 2.0 版的 API 是相同的。<br>现在jQuery 1.x最新的是jQuery 1.11.4, jQuery 2.x最新的是jQuery 2.1.3.<br>1.9 和 2.0 版的 API 是相同的。那按推论1.10和2.1的 API 是相同的。但是1.11已经出世了，<br>2.x还没有对应的版本。感觉有点混乱呢，不过不用担心，jQuery团队在他们的博客上给出了一个方案。</p>
+<h2 id="jQuery_3-x">jQuery 3.x</h2><p>原文如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Our next releases will use a different nomenclature. </span><br><span class="line">As before, there will be two different released files. </span><br><span class="line">The successor to what is now version <span class="number">1.11</span>.<span class="number">1</span> will become jQuery Compat <span class="number">3.0</span>.</span><br><span class="line">The successor to jQuery <span class="number">2.1</span>.<span class="number">1</span> will be jQuery <span class="number">3.0</span>.</span><br><span class="line">There are two different packages on npm and Bower, </span><br><span class="line">but they share the same version to indicate they have the same API behavior.</span><br></pre></td></tr></table></figure></p>
+<p>意思就是：我们下次发布将使用新的版本系统。1.x的继任者将是jQuery Compat 3.0，<br>2.x的继任者将是jQuery 3.0，他们将使用相同的版本号表明他们拥有相同的API。<br>这就清楚了，以后看到jQuery Compat 3.1，就知道和他拥有相同的API的版本是jQuery 3.1。</p>
+<h2 id="稳定版本">稳定版本</h2><p>版本号最末一位数字，如jQuery 1.11.4的4表示jQuery 1.11的第四版，一般是修复了一些BUG，<br>所以最新版本的上一版本是稳定无错的，比如jQuery 1.10.4。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/19/http-code/" data-id="cihzkyq6v001574i4i9cz4tw3" class="article-share-link" data-share="baidu" data-title="HTTP状态响应码与nginx">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/12/08/jQuery版本问题/" data-id="cihzkyq6f000q74i48xlr1b5u" class="article-share-link" data-share="baidu" data-title="jQuery版本问题">分享到</a>
       
 
  
@@ -143,7 +117,7 @@
        
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" style="height:300px" data-thread-key="post-http-code" data-title="HTTP状态响应码与nginx" data-url="http://monovenu.com.io/2015/11/19/http-code/"></div>
+    <div class="ds-thread" style="height:300px" data-thread-key="post-jQuery版本问题" data-title="jQuery版本问题" data-url="http://monovenu.com.io/2015/12/08/jQuery版本问题/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -162,7 +136,7 @@
 
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP响应码/">HTTP响应码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本控制/">版本控制</a></li></ul>
 
     </footer>
   </div>
@@ -170,19 +144,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/11/20/jQuery-selector/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/09/baidu_verify_nEQIp4IWZN/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
       <div class="article-nav-title">
         
-          jQuery选择器
+          (no title)
         
       </div>
     </a>
   
   
-    <a href="/2015/11/16/jQuery代码风格/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/12/07/epoll/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">jQuery代码风格</div>
+      <div class="article-nav-title">epoll</div>
     </a>
   
 </nav>
