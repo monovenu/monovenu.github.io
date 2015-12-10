@@ -73,94 +73,6 @@
     <div class="outer">
       <section id="main">
   
-    <article id="post-commonJs" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/13/commonJs/" class="article-date">
-  <time datetime="2015-11-13T01:22:01.000Z" itemprop="datePublished">2015-11-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/13/commonJs/">CommonJS规范</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>博主最近在学习模块化，看完<a href="http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html" target="_blank" rel="external">阮一峰写的博文</a>和Samaritans写的<a href="http://www.cnblogs.com/dolphinX/p/4381855.html" target="_blank" rel="external">前端模块化</a>后获益匪浅，<br>现整理后转载如下：</p>
-<p>模块化的最大好处就是代码重用。我们可以使用别人的代码，<br>想要什么功能，就加载什么模块。<br>但是，这样做的前提是大家以同样的方式编写模块。<br>否则你有你的写法，我有我的写法，岂不是乱了套！<br>考虑到Javascript模块现在还没有官方规范，这一点就更重要了。</p>
-<h2 id="1、node-js">1、node.js</h2><p>2009年，美国程序员Ryan Dahl创造了<br>node.js项目，将javascript用于服务器端编程。<br>这标志”Javascript模块化编程”正式诞生。<br>因为老实说，在浏览器环境下，没有模块也不是特别大的问题，毕竟网页程序的复杂性有限；<br>但是在服务器端，一定要有模块，与操作系统和其他应用程序互动，否则根本没法编程。<br><img src="http://7xo561.com1.z0.glb.clouddn.com/bg2012103002.jpg" alt="node.js"><br>node.js的模块化，遵从CommonJS规范。</p>
-<h2 id="2、CommonJS">2、CommonJS</h2><h3 id="定义模块">定义模块</h3><p>根据CommonJS规范，一个文件就是一个模块。每个模块都是一个单独的作用域，也就是说在该模块内部定义的变量，无法被其他模块读取，除非定义为全局对象的属性。</p>
-<h3 id="模块输出">模块输出</h3><p>模块只有一个出口，module.exports对象。</p>
-<h3 id="加载模块">加载模块</h3><p>使用require方法读取文件并执行，返回module.exports对象。<br>实例如下：</p>
-<pre><code class="bash">//定义模块 myModel.js
-var name=<span class="string">"lyx"</span>;
-<span class="keyword">function</span> <span class="function"><span class="title">printName</span></span>(){
-    console.log(name);
-}
-module.exports={
-    <span class="built_in">print</span>Name: <span class="built_in">print</span>Name
-}
-
-//加载模块
-var nameModule=require(<span class="string">'myModule.js'</span>);
-nameModule.printName();
-</code></pre>
-<h2 id="3、浏览器环境">3、浏览器环境</h2><p>有了服务器端模块后，大家自然想要客户端模块。<br>如果两者能够兼容，一个模块不用修改就可以在服务器和浏览器上运行。<br>然而，看下面的代码。</p>
-<pre><code class="bash">var nameModule=require(<span class="string">'myModule.js'</span>);
-nameModule.printName();
-</code></pre>
-<p>执行nameModule.printName();必须要等myModule模块加载完成。<br>如果加载时间很长，整个程序就会等待。这对服务器端不是问题，<br>因为所以模块存放在本地硬盘，可以同步加载，等待时间就是磁盘读取时间。<br>但是，对于浏览器，这却是一个大问题，因为模块都放在服务器端，<br>等待时间取决于网速的快慢，可能要等很长时间，浏览器处于”假死”状态。<br>因此，浏览器端的模块，不能采用”同步加载”（synchronous），<br>只能采用”异步加载”（asynchronous）。这样AMD规范就因运而生了。<br>下篇博文，介绍AMD规范。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://monovenu.com.io/2015/11/13/commonJs/" data-id="cihzkyq7q001v74i4wfhc82dj" class="article-share-link" data-share="baidu" data-title="CommonJS规范">分享到</a>
-      
-
- 
-
-       
-       
-  <section id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" style="height:300px" data-thread-key="post-commonJs" data-title="CommonJS规范" data-url="undefined"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"monovenu"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-    <!-- 多说公共JS代码 end -->
-  </section>
-
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CommonJS/">CommonJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块化/">模块化</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-module" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/12/module/" class="article-date">
@@ -203,7 +115,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cihzkyq6f000h74i4izrwtkcm" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/12/module/" data-id="cihzl3j3t000h4ki4t0jjporw" class="article-share-link" data-share="baidu" data-title="Javascript模块化编程：模块的写法">分享到</a>
       
 
  
@@ -283,7 +195,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihzkyq60000c74i4twz5yp75" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/11/07/nineGrid/" data-id="cihzl3j3o000c4ki460wmozre" class="article-share-link" data-share="baidu" data-title="用border-image制作九宫格">分享到</a>
       
 
  
@@ -360,7 +272,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihzkyq7q001z74i4uws84093" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/28/clearfix/" data-id="cihzl3j58001z4ki4xwzge78x" class="article-share-link" data-share="baidu" data-title="清除浮动造成的影响">分享到</a>
       
 
  
@@ -432,7 +344,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihzkyq7b001k74i4j4hm9pup" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/22/cross-origin/" data-id="cihzl3j4x001k4ki4y9wewiyz" class="article-share-link" data-share="baidu" data-title="Ajax跨域方法总结">分享到</a>
       
 
  
@@ -518,7 +430,7 @@ nameModule.printName();
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://monovenu.com.io/2015/10/17/index/" data-id="cihzkyq6v001274i4a2m7n3mn" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
+        <a data-url="http://monovenu.com.io/2015/10/17/index/" data-id="cihzl3j4e00124ki4cf1b10p4" class="article-share-link" data-share="baidu" data-title="使用hexo+github搭建个人博客">分享到</a>
       
 
  
@@ -588,7 +500,7 @@ nameModule.printName();
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -598,10 +510,6 @@ nameModule.printName();
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2015/12/09/baidu_verify_nEQIp4IWZN/">(no title)</a>
-          </li>
         
           <li>
             <a href="/2015/12/08/jQuery版本问题/">jQuery版本问题</a>
@@ -617,6 +525,10 @@ nameModule.printName();
         
           <li>
             <a href="/2015/11/26/miniui/">MiniUi for php初探</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/25/echarts/">echarts 图表库入门</a>
           </li>
         
       </ul>
